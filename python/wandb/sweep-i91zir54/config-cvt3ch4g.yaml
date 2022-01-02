@@ -1,0 +1,35 @@
+wandb_version: 1
+
+dropout:
+  value: 0
+epochs:
+  value: 5
+fp_emax:
+  value: 65
+fp_explim:
+  value: CPFLOAT_EXPRANGE_TARG
+fp_flip:
+  value: CPFLOAT_SOFTERR
+fp_p:
+  value: 0.4258106184811957
+fp_precision:
+  value: 14
+fp_round:
+  value: CPFLOAT_RND_NA
+fp_subnormal:
+  value: CPFLOAT_SUBN_USE
+layer_sizes:
+  value:
+  - 784
+  - 30
+  - 10
+learning_rate:
+  value: 0.1
+loss:
+  value: mean_squared_error
+minibatch_size:
+  value: 10
+momentum_coefficient:
+  value: 0
+weight_decay:
+  value: 0.0001

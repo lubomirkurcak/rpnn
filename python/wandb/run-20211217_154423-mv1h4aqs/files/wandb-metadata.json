@@ -1,0 +1,26 @@
+{
+    "os": "Windows-10-10.0.19041-SP0",
+    "python": "3.9.2",
+    "heartbeatAt": "2021-12-17T14:44:24.845028",
+    "startedAt": "2021-12-17T14:44:23.416391",
+    "docker": null,
+    "gpu": "GeForce GTX 960",
+    "gpu_count": 1,
+    "cpu_count": 4,
+    "cuda": null,
+    "args": [
+        "-f",
+        "C:\\Users\\Lubko\\AppData\\Roaming\\jupyter\\runtime\\kernel-b20af5fc-94e8-4b4b-a024-359abc9adc2f.json"
+    ],
+    "state": "running",
+    "program": "gymrl/rl0.ipynb",
+    "root": "W:/shared",
+    "git": {
+        "remote": "https://gitlab.com/lubomirkurcak/shared.git",
+        "commit": "0d9530c4675317524eda07347f5ce4ff9ca6b8b5"
+    },
+    "email": "lubomirkurcak@gmail.com",
+    "host": "DESKTOP-03BNSVH",
+    "username": "Lubko",
+    "executable": "c:\\users\\lubko\\appdata\\local\\programs\\python\\python39\\python.exe"
+}

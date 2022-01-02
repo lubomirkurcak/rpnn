@@ -1,0 +1,13 @@
+{'dropout': 0, 'epochs': 5, 'fp_emax': 25, 'fp_explim': 'CPFLOAT_EXPRANGE_TARG', 'fp_flip': 'CPFLOAT_SOFTERR', 'fp_p': 0.23387863091374417, 'fp_precision': 8, 'fp_round': 'CPFLOAT_RND_NA', 'fp_subnormal': 'CPFLOAT_SUBN_RND', 'layer_sizes': [784, 30, 10], 'learning_rate': 0.1, 'loss': 'mean_squared_error', 'minibatch_size': 10, 'momentum_coefficient': 0, 'weight_decay': 0.0001}
+cpfloat_validate_optstruct returned 0
+Epoch 0/5 Batch 0/6000 Cost 3.172652 LR 0.100000
+Epoch 0/5 Batch 1024/6000 Cost 0.461157 LR 0.100000
+Epoch 0/5 Batch 2048/6000 Cost 0.145247 LR 0.100000
+Epoch 0/5 Batch 3072/6000 Cost 0.332683 LR 0.100000
+Epoch 0/5 Batch 4096/6000 Cost 0.300359 LR 0.100000
+Epoch 0/5 Batch 5120/6000 Cost 0.251059 LR 0.100000
+Epoch 0/5 Correct 9122/10000 Best 9122(0)Epoch 1/5 Batch 0/6000 Cost 0.074134 LR 0.100000
+Epoch 1/5 Batch 1024/6000 Cost 0.334844 LR 0.100000
+Epoch 1/5 Batch 2048/6000 Cost 0.068510 LR 0.100000
+Epoch 1/5 Batch 3072/6000 Cost 0.290792 LR 0.100000
+Epoch 1/5 Batch 4096/6000 Cost 0.229688 LR 0.100000

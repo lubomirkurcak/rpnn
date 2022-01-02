@@ -1,0 +1,83 @@
+2021-12-18 14:48:18,958 INFO    Thread-888:3400 [wandb_setup.py:_flush():69] setting env: {'root_dir': 'W:\\shared\\python\\gymrl', 'sweep_id': 'i91zir54', 'project': 'my-test-project', 'run_id': 'taqjehdx', 'sweep_param_path': 'W:\\shared\\python\\gymrl\\wandb\\sweep-i91zir54\\config-taqjehdx.yaml'}
+2021-12-18 14:48:18,958 INFO    Thread-888:3400 [wandb_setup.py:_flush():69] setting login settings: {}
+2021-12-18 14:48:18,959 INFO    Thread-888:3400 [wandb_init.py:_log_setup():334] Logging user logs to W:\shared\python\gymrl\wandb\run-20211218_144818-taqjehdx\logs\debug.log
+2021-12-18 14:48:18,959 INFO    Thread-888:3400 [wandb_init.py:_log_setup():335] Logging internal logs to W:\shared\python\gymrl\wandb\run-20211218_144818-taqjehdx\logs\debug-internal.log
+2021-12-18 14:48:18,959 INFO    Thread-888:3400 [wandb_init.py:_jupyter_setup():285] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x0000028DD1DEC0A0>
+2021-12-18 14:48:18,959 INFO    Thread-888:3400 [wandb_init.py:init():367] calling init triggers
+2021-12-18 14:48:18,960 INFO    Thread-888:3400 [wandb_init.py:init():372] wandb.init called with sweep_config: {'dropout': 0, 'epochs': 5, 'fp_emax': 35, 'fp_explim': 'CPFLOAT_EXPRANGE_TARG', 'fp_flip': 'CPFLOAT_SOFTERR', 'fp_p': 0.4460679481630072, 'fp_precision': 23, 'fp_round': 'CPFLOAT_RND_NE', 'fp_subnormal': 'CPFLOAT_SUBN_RND', 'layer_sizes': [784, 30, 10], 'learning_rate': 0.1, 'loss': 'mean_squared_error', 'minibatch_size': 10, 'momentum_coefficient': 0, 'weight_decay': 0.0001}
+config: {}
+2021-12-18 14:48:18,960 INFO    Thread-888:3400 [wandb_init.py:init():416] starting backend
+2021-12-18 14:48:18,960 INFO    Thread-888:3400 [backend.py:_multiprocessing_setup():69] multiprocessing start_methods=spawn, using: spawn
+2021-12-18 14:48:18,961 INFO    Thread-888:3400 [backend.py:ensure_launched():123] starting backend process...
+2021-12-18 14:48:19,027 INFO    Thread-888:3400 [backend.py:ensure_launched():127] started backend process with pid: 23412
+2021-12-18 14:48:19,028 INFO    Thread-888:3400 [wandb_init.py:init():421] backend started and connected
+2021-12-18 14:48:19,037 INFO    Thread-888:3400 [wandb_run.py:_config_callback():733] config_cb None None {'dropout': 0, 'epochs': 5, 'fp_emax': 35, 'fp_explim': 'CPFLOAT_EXPRANGE_TARG', 'fp_flip': 'CPFLOAT_SOFTERR', 'fp_p': 0.4460679481630072, 'fp_precision': 23, 'fp_round': 'CPFLOAT_RND_NE', 'fp_subnormal': 'CPFLOAT_SUBN_RND', 'layer_sizes': [784, 30, 10], 'learning_rate': 0.1, 'loss': 'mean_squared_error', 'minibatch_size': 10, 'momentum_coefficient': 0, 'weight_decay': 0.0001}
+2021-12-18 14:48:19,037 INFO    Thread-888:3400 [wandb_init.py:init():461] updated telemetry
+2021-12-18 14:48:19,038 INFO    Thread-888:3400 [wandb_init.py:init():480] communicating current version
+2021-12-18 14:48:19,949 INFO    Thread-888:3400 [wandb_init.py:init():485] got version response upgrade_message: "wandb version 0.12.9 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2021-12-18 14:48:19,950 INFO    Thread-888:3400 [wandb_init.py:init():493] communicating run to backend with 30 second timeout
+2021-12-18 14:48:20,310 INFO    Thread-888:3400 [wandb_init.py:init():518] starting run threads in backend
+2021-12-18 14:48:20,485 INFO    Thread-888:3400 [wandb_run.py:_console_start():1476] atexit reg
+2021-12-18 14:48:20,486 INFO    Thread-888:3400 [wandb_run.py:_redirect():1339] redirect: SettingsConsole.WRAP
+2021-12-18 14:48:20,486 INFO    Thread-888:3400 [wandb_run.py:_redirect():1374] Wrapping output streams.
+2021-12-18 14:48:20,486 INFO    Thread-888:3400 [wandb_run.py:_redirect():1390] Redirects installed.
+2021-12-18 14:48:20,486 INFO    Thread-888:3400 [wandb_init.py:init():542] run started, returning control to user process
+2021-12-18 14:55:47,264 ERROR   Thread-11 :3400 [retry.py:__call__():111] Retry attempt failed:
+Traceback (most recent call last):
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py", line 382, in _make_request
+    self._validate_conn(conn)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py", line 1010, in _validate_conn
+    conn.connect()
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\connection.py", line 411, in connect
+    self.sock = ssl_wrap_socket(
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\util\ssl_.py", line 428, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\util\ssl_.py", line 472, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: EOF occurred in violation of protocol (_ssl.c:1123)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\requests\adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\util\retry.py", line 573, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1123)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\wandb\old\retry.py", line 96, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\wandb\sdk\internal\internal_api.py", line 123, in execute
+    return self.client.execute(*args, **kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\wandb\vendor\gql-0.2.0\gql\client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\wandb\vendor\gql-0.2.0\gql\client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\wandb\vendor\gql-0.2.0\gql\transport\requests.py", line 38, in execute
+    request = requests.post(self.url, **post_args)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\requests\api.py", line 119, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\requests\api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\requests\sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\requests\sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\requests\adapters.py", line 514, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1123)')))
+2021-12-18 15:00:05,398 INFO    Thread-888:3400 [wandb_run.py:finish():1135] finishing run lubomirkurcak/my-test-project/taqjehdx

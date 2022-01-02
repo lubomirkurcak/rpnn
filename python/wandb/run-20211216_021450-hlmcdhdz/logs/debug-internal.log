@@ -1,0 +1,54 @@
+2021-12-16 02:14:51,032 INFO    MainThread:24264 [internal.py:wandb_internal():88] W&B internal server running at pid: 24264, started at: 2021-12-16 02:14:51.026297
+2021-12-16 02:14:51,034 INFO    WriterThread:24264 [datastore.py:open_for_write():77] open: W:\shared\python\gymrl\wandb\run-20211216_021450-hlmcdhdz\run-hlmcdhdz.wandb
+2021-12-16 02:14:51,035 DEBUG   HandlerThread:24264 [handler.py:handle_request():101] handle_request: check_version
+2021-12-16 02:14:51,036 DEBUG   SenderThread:24264 [sender.py:send():122] send: header
+2021-12-16 02:14:51,036 DEBUG   SenderThread:24264 [sender.py:send():122] send: request
+2021-12-16 02:14:51,036 DEBUG   SenderThread:24264 [sender.py:send_request():131] send_request: check_version
+2021-12-16 02:14:51,211 DEBUG   SenderThread:24264 [sender.py:send():122] send: run
+2021-12-16 02:14:51,580 INFO    SenderThread:24264 [sender.py:_start_run_threads():596] run started: hlmcdhdz with start time 1639617290
+2021-12-16 02:14:51,580 DEBUG   SenderThread:24264 [sender.py:send():122] send: summary
+2021-12-16 02:14:51,581 DEBUG   HandlerThread:24264 [handler.py:handle_request():101] handle_request: run_start
+2021-12-16 02:14:51,581 INFO    SenderThread:24264 [sender.py:_save_file():730] saving file wandb-summary.json with policy end
+2021-12-16 02:14:51,592 DEBUG   HandlerThread:24264 [meta.py:__init__():34] meta init
+2021-12-16 02:14:51,592 DEBUG   HandlerThread:24264 [meta.py:__init__():48] meta init done
+2021-12-16 02:14:51,592 DEBUG   HandlerThread:24264 [meta.py:probe():190] probe
+2021-12-16 02:14:51,605 DEBUG   HandlerThread:24264 [meta.py:_setup_git():180] setup git
+2021-12-16 02:14:51,691 DEBUG   HandlerThread:24264 [meta.py:_setup_git():187] setup git done
+2021-12-16 02:14:51,691 DEBUG   HandlerThread:24264 [meta.py:_save_pip():52] save pip
+2021-12-16 02:14:51,691 DEBUG   HandlerThread:24264 [meta.py:_save_pip():66] save pip done
+2021-12-16 02:14:51,691 DEBUG   HandlerThread:24264 [meta.py:probe():231] probe done
+2021-12-16 02:14:51,805 DEBUG   SenderThread:24264 [sender.py:send():122] send: files
+2021-12-16 02:14:51,806 INFO    SenderThread:24264 [sender.py:_save_file():730] saving file wandb-metadata.json with policy now
+2021-12-16 02:14:51,806 DEBUG   HandlerThread:24264 [handler.py:handle_request():101] handle_request: status
+2021-12-16 02:14:51,806 DEBUG   SenderThread:24264 [sender.py:send():122] send: request
+2021-12-16 02:14:51,806 DEBUG   SenderThread:24264 [sender.py:send_request():131] send_request: status
+2021-12-16 02:14:55,291 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:15:00,155 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:15:05,020 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:15:09,946 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:15:14,814 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:15:19,710 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:15:24,590 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:15:29,478 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:15:29,849 DEBUG   HandlerThread:24264 [handler.py:handle_request():101] handle_request: status
+2021-12-16 02:15:29,849 DEBUG   SenderThread:24264 [sender.py:send():122] send: request
+2021-12-16 02:15:29,850 DEBUG   SenderThread:24264 [sender.py:send_request():131] send_request: status
+2021-12-16 02:15:34,335 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:15:39,235 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:15:44,104 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:15:48,977 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:15:53,865 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:15:57,721 DEBUG   HandlerThread:24264 [handler.py:handle_request():101] handle_request: status
+2021-12-16 02:15:57,721 DEBUG   SenderThread:24264 [sender.py:send():122] send: request
+2021-12-16 02:15:57,721 DEBUG   SenderThread:24264 [sender.py:send_request():131] send_request: status
+2021-12-16 02:15:59,181 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:16:03,649 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:16:08,537 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:16:13,404 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:16:18,270 DEBUG   SenderThread:24264 [sender.py:send():122] send: stats
+2021-12-16 02:16:20,874 WARNING MainThread:24264 [internal.py:is_dead():343] Internal process exiting, parent pid 2412 disappeared
+2021-12-16 02:16:20,875 ERROR   MainThread:24264 [internal.py:wandb_internal():142] Internal process shutdown.
+2021-12-16 02:16:21,296 INFO    SenderThread:24264 [sender.py:finish():833] shutting down sender
+2021-12-16 02:16:21,296 INFO    WriterThread:24264 [datastore.py:close():258] close: W:\shared\python\gymrl\wandb\run-20211216_021450-hlmcdhdz\run-hlmcdhdz.wandb
+2021-12-16 02:16:21,296 INFO    HandlerThread:24264 [handler.py:finish():535] shutting down handler
+2021-12-16 02:16:23,589 INFO    MainThread:24264 [internal.py:handle_exit():78] Internal process exited

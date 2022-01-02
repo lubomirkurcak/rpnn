@@ -1,0 +1,8 @@
+The validation function returned 0.
+Epoch 0/1 Batch 0/6000 Cost 2.245333 LR 0.100000
+Epoch 0/1 Batch 1024/6000 Cost 0.331166 LR 0.100000
+Epoch 0/1 Batch 2048/6000 Cost 0.157074 LR 0.100000
+Epoch 0/1 Batch 3072/6000 Cost 0.342453 LR 0.100000
+Epoch 0/1 Batch 4096/6000 Cost 0.251907 LR 0.100000
+Epoch 0/1 Batch 5120/6000 Cost 0.290493 LR 0.100000
+Epoch 0/1 Correct 8853/10000 Best 8853(0)Early accuracy stop!

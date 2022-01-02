@@ -1,0 +1,8 @@
+cpfloat_validate_optstruct returned 0
+Epoch 0/5 Batch 0/6000 Cost 3.755166 LR 0.100000
+Epoch 0/5 Batch 1024/6000 Cost 0.887000 LR 0.100000
+Epoch 0/5 Batch 2048/6000 Cost 0.922997 LR 0.100000
+Epoch 0/5 Batch 3072/6000 Cost 0.895755 LR 0.100000
+Epoch 0/5 Batch 4096/6000 Cost 0.913445 LR 0.100000
+Epoch 0/5 Batch 5120/6000 Cost 0.868835 LR 0.100000
+Epoch 0/5 Correct 958/10000 Best 958(0)Early stopping due to poor performance

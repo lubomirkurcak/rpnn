@@ -1,0 +1,289 @@
+2021-12-17 05:39:14,846 INFO    MainThread:24368 [internal.py:wandb_internal():88] W&B internal server running at pid: 24368, started at: 2021-12-17 05:39:14.840590
+2021-12-17 05:39:14,847 INFO    WriterThread:24368 [datastore.py:open_for_write():77] open: W:\shared\python\gymrl\wandb\run-20211217_053913-hxd0jg1e\run-hxd0jg1e.wandb
+2021-12-17 05:39:14,848 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: check_version
+2021-12-17 05:39:14,849 DEBUG   SenderThread:24368 [sender.py:send():122] send: header
+2021-12-17 05:39:14,849 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:39:14,849 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: check_version
+2021-12-17 05:39:14,971 DEBUG   SenderThread:24368 [sender.py:send():122] send: run
+2021-12-17 05:39:15,336 INFO    SenderThread:24368 [sender.py:_start_run_threads():596] run started: hxd0jg1e with start time 1639715953
+2021-12-17 05:39:15,337 DEBUG   SenderThread:24368 [sender.py:send():122] send: summary
+2021-12-17 05:39:15,337 INFO    SenderThread:24368 [sender.py:_save_file():730] saving file wandb-summary.json with policy end
+2021-12-17 05:39:15,338 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: run_start
+2021-12-17 05:39:15,348 DEBUG   HandlerThread:24368 [meta.py:__init__():34] meta init
+2021-12-17 05:39:15,348 DEBUG   HandlerThread:24368 [meta.py:__init__():48] meta init done
+2021-12-17 05:39:15,348 DEBUG   HandlerThread:24368 [meta.py:probe():190] probe
+2021-12-17 05:39:15,359 DEBUG   HandlerThread:24368 [meta.py:_setup_git():180] setup git
+2021-12-17 05:39:15,439 DEBUG   HandlerThread:24368 [meta.py:_setup_git():187] setup git done
+2021-12-17 05:39:15,439 DEBUG   HandlerThread:24368 [meta.py:_save_pip():52] save pip
+2021-12-17 05:39:15,439 DEBUG   HandlerThread:24368 [meta.py:_save_pip():66] save pip done
+2021-12-17 05:39:15,439 DEBUG   HandlerThread:24368 [meta.py:probe():231] probe done
+2021-12-17 05:39:15,559 DEBUG   SenderThread:24368 [sender.py:send():122] send: files
+2021-12-17 05:39:15,559 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: status
+2021-12-17 05:39:15,559 INFO    SenderThread:24368 [sender.py:_save_file():730] saving file wandb-metadata.json with policy now
+2021-12-17 05:39:15,560 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:39:15,560 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: status
+2021-12-17 05:39:19,144 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:39:24,128 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:39:29,100 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:39:34,083 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:39:39,057 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:39:44,031 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:39:49,022 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:39:54,027 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:39:59,107 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:40:04,113 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:40:09,089 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:40:14,072 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:40:19,038 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:40:24,021 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:40:29,014 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:40:34,040 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:40:39,032 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:40:43,975 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:40:48,937 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:40:53,933 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:40:58,066 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: status
+2021-12-17 05:40:58,066 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:40:58,066 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: status
+2021-12-17 05:40:58,924 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:41:03,902 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:41:08,889 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:41:13,889 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:41:18,897 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:41:23,899 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:41:28,902 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:41:33,867 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:41:38,852 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:41:43,890 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:41:48,882 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:41:53,886 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:41:58,881 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:42:03,882 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:42:08,889 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:42:12,280 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: status
+2021-12-17 05:42:12,280 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:42:12,280 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: status
+2021-12-17 05:42:13,862 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:42:18,864 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:42:23,889 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:42:28,909 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:42:33,925 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:42:38,906 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:42:43,891 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:42:48,863 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:42:53,859 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:42:58,868 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:43:03,581 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: status
+2021-12-17 05:43:03,582 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:43:03,582 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: status
+2021-12-17 05:43:03,859 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:43:08,822 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:43:13,823 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:43:18,854 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:43:23,867 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:43:28,853 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:43:33,842 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:43:38,819 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:43:43,847 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:43:48,834 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:43:53,827 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:43:54,789 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: status
+2021-12-17 05:43:54,790 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:43:54,790 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: status
+2021-12-17 05:43:58,819 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:44:03,811 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:44:08,801 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:44:13,830 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:44:18,816 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:44:23,810 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:44:28,796 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:44:33,792 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:44:38,801 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:44:43,660 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: status
+2021-12-17 05:44:43,660 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:44:43,660 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: status
+2021-12-17 05:44:43,940 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:44:48,803 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:44:53,831 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:44:58,807 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:45:03,802 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:45:08,801 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:45:13,786 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:45:18,783 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:45:23,791 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:45:28,769 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:45:33,780 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:45:38,800 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:45:43,774 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:45:48,776 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:45:53,812 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:45:58,825 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:46:00,568 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: status
+2021-12-17 05:46:00,569 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:46:00,569 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: status
+2021-12-17 05:46:03,804 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:46:08,793 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:46:13,793 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:46:18,803 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:46:23,819 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:46:28,830 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:46:33,800 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:46:38,783 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:46:43,828 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:46:48,817 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:46:49,335 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: status
+2021-12-17 05:46:49,335 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:46:49,335 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: status
+2021-12-17 05:46:53,817 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:46:58,821 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:47:03,815 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:47:08,812 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:47:13,797 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:47:18,840 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:47:23,818 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:47:28,824 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:47:33,867 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:47:38,866 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:47:43,842 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:47:48,850 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:47:53,848 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:47:58,847 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:48:03,831 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:48:06,059 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: status
+2021-12-17 05:48:06,059 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:48:06,059 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: status
+2021-12-17 05:48:08,800 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:48:13,803 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:48:18,781 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:48:23,828 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:48:28,853 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:48:33,844 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:48:38,836 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:48:43,837 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:48:48,835 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:48:53,833 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:48:57,209 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: status
+2021-12-17 05:48:57,210 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:48:57,210 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: status
+2021-12-17 05:48:58,826 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:49:03,796 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:49:08,777 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:49:13,775 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:49:18,829 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:49:23,840 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:49:28,815 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:49:33,796 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:49:38,767 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:49:43,771 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:49:45,880 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: status
+2021-12-17 05:49:45,880 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:49:45,880 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: status
+2021-12-17 05:49:48,769 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:49:53,767 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:49:58,768 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:50:03,777 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:50:08,753 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:50:13,767 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:50:18,766 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:50:23,804 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:50:28,766 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:50:33,757 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:50:38,753 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:50:43,729 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:50:48,727 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:50:53,749 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:50:58,790 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:51:02,668 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: status
+2021-12-17 05:51:02,668 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:51:02,668 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: status
+2021-12-17 05:51:03,779 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:51:08,764 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:51:13,756 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:51:18,744 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:51:23,750 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:51:28,755 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:51:33,725 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:51:38,726 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:51:43,717 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:51:48,720 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:51:51,423 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: status
+2021-12-17 05:51:51,423 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:51:51,424 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: status
+2021-12-17 05:51:51,429 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: poll_exit
+2021-12-17 05:51:51,690 DEBUG   SenderThread:24368 [sender.py:send():122] send: history
+2021-12-17 05:51:51,690 DEBUG   SenderThread:24368 [sender.py:send():122] send: summary
+2021-12-17 05:51:51,691 INFO    SenderThread:24368 [sender.py:_save_file():730] saving file wandb-summary.json with policy end
+2021-12-17 05:51:51,691 DEBUG   SenderThread:24368 [sender.py:send():122] send: telemetry
+2021-12-17 05:51:51,951 DEBUG   SenderThread:24368 [sender.py:send():122] send: exit
+2021-12-17 05:51:51,951 INFO    SenderThread:24368 [sender.py:send_exit():200] handling exit code: 0
+2021-12-17 05:51:51,951 INFO    SenderThread:24368 [sender.py:send_exit():208] send defer
+2021-12-17 05:51:51,951 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:51:51,951 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: poll_exit
+2021-12-17 05:51:51,952 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: defer
+2021-12-17 05:51:51,952 INFO    HandlerThread:24368 [handler.py:handle_request_defer():115] handle defer: 0
+2021-12-17 05:51:51,952 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:51:51,952 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: defer
+2021-12-17 05:51:51,952 INFO    SenderThread:24368 [sender.py:send_request_defer():217] handle sender defer: 0
+2021-12-17 05:51:51,952 INFO    SenderThread:24368 [sender.py:send_request_defer():253] send defer: 1
+2021-12-17 05:51:51,952 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: defer
+2021-12-17 05:51:51,952 INFO    HandlerThread:24368 [handler.py:handle_request_defer():115] handle defer: 1
+2021-12-17 05:51:52,013 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:51:52,013 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: defer
+2021-12-17 05:51:52,013 INFO    SenderThread:24368 [sender.py:send_request_defer():217] handle sender defer: 1
+2021-12-17 05:51:52,013 INFO    SenderThread:24368 [sender.py:send_request_defer():253] send defer: 2
+2021-12-17 05:51:52,014 DEBUG   SenderThread:24368 [sender.py:send():122] send: stats
+2021-12-17 05:51:52,015 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: defer
+2021-12-17 05:51:52,015 INFO    HandlerThread:24368 [handler.py:handle_request_defer():115] handle defer: 2
+2021-12-17 05:51:52,015 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:51:52,015 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: defer
+2021-12-17 05:51:52,015 INFO    SenderThread:24368 [sender.py:send_request_defer():217] handle sender defer: 2
+2021-12-17 05:51:52,015 INFO    SenderThread:24368 [sender.py:send_request_defer():253] send defer: 3
+2021-12-17 05:51:52,016 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: defer
+2021-12-17 05:51:52,016 INFO    HandlerThread:24368 [handler.py:handle_request_defer():115] handle defer: 3
+2021-12-17 05:51:52,016 DEBUG   SenderThread:24368 [sender.py:send():122] send: summary
+2021-12-17 05:51:52,016 INFO    SenderThread:24368 [sender.py:_save_file():730] saving file wandb-summary.json with policy end
+2021-12-17 05:51:52,017 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:51:52,017 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: defer
+2021-12-17 05:51:52,017 INFO    SenderThread:24368 [sender.py:send_request_defer():217] handle sender defer: 3
+2021-12-17 05:51:52,017 INFO    SenderThread:24368 [sender.py:send_request_defer():253] send defer: 4
+2021-12-17 05:51:52,017 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: defer
+2021-12-17 05:51:52,017 INFO    HandlerThread:24368 [handler.py:handle_request_defer():115] handle defer: 4
+2021-12-17 05:51:52,017 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:51:52,017 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: defer
+2021-12-17 05:51:52,017 INFO    SenderThread:24368 [sender.py:send_request_defer():217] handle sender defer: 4
+2021-12-17 05:51:52,532 INFO    SenderThread:24368 [sender.py:send_request_defer():253] send defer: 5
+2021-12-17 05:51:52,534 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: defer
+2021-12-17 05:51:52,534 INFO    HandlerThread:24368 [handler.py:handle_request_defer():115] handle defer: 5
+2021-12-17 05:51:52,536 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:51:52,536 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: defer
+2021-12-17 05:51:52,536 INFO    SenderThread:24368 [sender.py:send_request_defer():217] handle sender defer: 5
+2021-12-17 05:51:52,536 INFO    SenderThread:24368 [sender.py:send_request_defer():253] send defer: 6
+2021-12-17 05:51:52,539 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: defer
+2021-12-17 05:51:52,539 INFO    HandlerThread:24368 [handler.py:handle_request_defer():115] handle defer: 6
+2021-12-17 05:51:52,540 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:51:52,540 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: defer
+2021-12-17 05:51:52,540 INFO    SenderThread:24368 [sender.py:send_request_defer():217] handle sender defer: 6
+2021-12-17 05:51:52,894 INFO    SenderThread:24368 [sender.py:send_request_defer():253] send defer: 7
+2021-12-17 05:51:52,894 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: defer
+2021-12-17 05:51:52,894 INFO    HandlerThread:24368 [handler.py:handle_request_defer():115] handle defer: 7
+2021-12-17 05:51:52,894 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:51:52,894 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: defer
+2021-12-17 05:51:52,895 INFO    SenderThread:24368 [sender.py:send_request_defer():217] handle sender defer: 7
+2021-12-17 05:51:52,895 INFO    SenderThread:24368 [sender.py:send_request_defer():253] send defer: 8
+2021-12-17 05:51:52,895 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: defer
+2021-12-17 05:51:52,895 INFO    HandlerThread:24368 [handler.py:handle_request_defer():115] handle defer: 8
+2021-12-17 05:51:52,896 DEBUG   SenderThread:24368 [sender.py:send():122] send: final
+2021-12-17 05:51:52,896 DEBUG   SenderThread:24368 [sender.py:send():122] send: footer
+2021-12-17 05:51:52,896 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:51:52,896 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: defer
+2021-12-17 05:51:52,896 INFO    SenderThread:24368 [sender.py:send_request_defer():217] handle sender defer: 8
+2021-12-17 05:51:53,962 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: poll_exit
+2021-12-17 05:51:53,962 DEBUG   SenderThread:24368 [sender.py:send():122] send: request
+2021-12-17 05:51:53,962 DEBUG   SenderThread:24368 [sender.py:send_request():131] send_request: poll_exit
+2021-12-17 05:51:53,964 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: get_summary
+2021-12-17 05:51:53,965 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: sampled_history
+2021-12-17 05:51:53,966 DEBUG   HandlerThread:24368 [handler.py:handle_request():101] handle_request: shutdown
+2021-12-17 05:51:53,966 INFO    HandlerThread:24368 [handler.py:finish():535] shutting down handler
+2021-12-17 05:51:54,913 INFO    WriterThread:24368 [datastore.py:close():258] close: W:\shared\python\gymrl\wandb\run-20211217_053913-hxd0jg1e\run-hxd0jg1e.wandb
+2021-12-17 05:51:54,975 INFO    SenderThread:24368 [sender.py:finish():833] shutting down sender
+2021-12-17 05:51:54,976 INFO    MainThread:24368 [internal.py:handle_exit():78] Internal process exited

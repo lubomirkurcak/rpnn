@@ -1,0 +1,32 @@
+2021-12-16 02:16:20,326 INFO    MainThread:12956 [internal.py:wandb_internal():88] W&B internal server running at pid: 12956, started at: 2021-12-16 02:16:20.321946
+2021-12-16 02:16:20,328 INFO    WriterThread:12956 [datastore.py:open_for_write():77] open: W:\shared\python\gymrl\wandb\run-20211216_021619-dhkjsepd\run-dhkjsepd.wandb
+2021-12-16 02:16:20,328 DEBUG   HandlerThread:12956 [handler.py:handle_request():101] handle_request: check_version
+2021-12-16 02:16:20,329 DEBUG   SenderThread:12956 [sender.py:send():122] send: header
+2021-12-16 02:16:20,329 DEBUG   SenderThread:12956 [sender.py:send():122] send: request
+2021-12-16 02:16:20,329 DEBUG   SenderThread:12956 [sender.py:send_request():131] send_request: check_version
+2021-12-16 02:16:20,454 DEBUG   SenderThread:12956 [sender.py:send():122] send: run
+2021-12-16 02:16:20,834 INFO    SenderThread:12956 [sender.py:_start_run_threads():596] run started: dhkjsepd with start time 1639617379
+2021-12-16 02:16:20,834 DEBUG   SenderThread:12956 [sender.py:send():122] send: summary
+2021-12-16 02:16:20,835 DEBUG   HandlerThread:12956 [handler.py:handle_request():101] handle_request: run_start
+2021-12-16 02:16:20,835 INFO    SenderThread:12956 [sender.py:_save_file():730] saving file wandb-summary.json with policy end
+2021-12-16 02:16:20,845 DEBUG   HandlerThread:12956 [meta.py:__init__():34] meta init
+2021-12-16 02:16:20,845 DEBUG   HandlerThread:12956 [meta.py:__init__():48] meta init done
+2021-12-16 02:16:20,845 DEBUG   HandlerThread:12956 [meta.py:probe():190] probe
+2021-12-16 02:16:20,856 DEBUG   HandlerThread:12956 [meta.py:_setup_git():180] setup git
+2021-12-16 02:16:20,929 DEBUG   HandlerThread:12956 [meta.py:_setup_git():187] setup git done
+2021-12-16 02:16:20,930 DEBUG   HandlerThread:12956 [meta.py:_save_pip():52] save pip
+2021-12-16 02:16:20,930 DEBUG   HandlerThread:12956 [meta.py:_save_pip():66] save pip done
+2021-12-16 02:16:20,930 DEBUG   HandlerThread:12956 [meta.py:probe():231] probe done
+2021-12-16 02:16:21,046 DEBUG   HandlerThread:12956 [handler.py:handle_request():101] handle_request: status
+2021-12-16 02:16:21,047 DEBUG   SenderThread:12956 [sender.py:send():122] send: files
+2021-12-16 02:16:21,047 INFO    SenderThread:12956 [sender.py:_save_file():730] saving file wandb-metadata.json with policy now
+2021-12-16 02:16:21,047 DEBUG   SenderThread:12956 [sender.py:send():122] send: request
+2021-12-16 02:16:21,048 DEBUG   SenderThread:12956 [sender.py:send_request():131] send_request: status
+2021-12-16 02:16:24,551 DEBUG   SenderThread:12956 [sender.py:send():122] send: stats
+2021-12-16 02:16:29,416 WARNING MainThread:12956 [internal.py:is_dead():343] Internal process exiting, parent pid 21248 disappeared
+2021-12-16 02:16:29,417 ERROR   MainThread:12956 [internal.py:wandb_internal():142] Internal process shutdown.
+2021-12-16 02:16:29,449 INFO    HandlerThread:12956 [handler.py:finish():535] shutting down handler
+2021-12-16 02:16:29,449 INFO    WriterThread:12956 [datastore.py:close():258] close: W:\shared\python\gymrl\wandb\run-20211216_021619-dhkjsepd\run-dhkjsepd.wandb
+2021-12-16 02:16:29,450 DEBUG   SenderThread:12956 [sender.py:send():122] send: stats
+2021-12-16 02:16:29,450 INFO    SenderThread:12956 [sender.py:finish():833] shutting down sender
+2021-12-16 02:16:31,634 INFO    MainThread:12956 [internal.py:handle_exit():78] Internal process exited

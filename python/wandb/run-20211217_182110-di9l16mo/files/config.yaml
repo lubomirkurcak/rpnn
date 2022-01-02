@@ -1,0 +1,66 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.10.21
+    is_jupyter_run: true
+    is_kaggle_kernel: false
+    python_version: 3.9.2
+    t:
+      3:
+      - 2
+      4: 3.9.2
+      5: 0.10.21
+      8:
+      - 1
+      - 3
+      - 5
+dropout:
+  desc: null
+  value: 0
+epochs:
+  desc: null
+  value: 5
+fp_emax:
+  desc: null
+  value: 52
+fp_explim:
+  desc: null
+  value: CPFLOAT_EXPRANGE_TARG
+fp_flip:
+  desc: null
+  value: CPFLOAT_SOFTERR
+fp_p:
+  desc: null
+  value: 0.16431184833386214
+fp_precision:
+  desc: null
+  value: 16
+fp_round:
+  desc: null
+  value: CPFLOAT_RND_SE
+fp_subnormal:
+  desc: null
+  value: CPFLOAT_SUBN_USE
+layer_sizes:
+  desc: null
+  value:
+  - 784
+  - 30
+  - 10
+learning_rate:
+  desc: null
+  value: 0.1
+loss:
+  desc: null
+  value: mean_squared_error
+minibatch_size:
+  desc: null
+  value: 10
+momentum_coefficient:
+  desc: null
+  value: 0
+weight_decay:
+  desc: null
+  value: 0.0001

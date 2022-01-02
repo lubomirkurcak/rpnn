@@ -1,0 +1,93 @@
+2021-12-16 13:51:02,161 INFO    Thread-221:6412 [wandb_setup.py:_flush():69] setting env: {'project': 'my-test-project', 'entity': 'lubomirkurcak', 'root_dir': 'W:\\shared\\python\\gymrl', 'sweep_id': 'i91zir54', 'run_id': 'eif3qu4f', 'sweep_param_path': 'W:\\shared\\python\\gymrl\\wandb\\sweep-i91zir54\\config-eif3qu4f.yaml'}
+2021-12-16 13:51:02,161 INFO    Thread-221:6412 [wandb_setup.py:_flush():69] setting login settings: {}
+2021-12-16 13:51:02,162 INFO    Thread-221:6412 [wandb_init.py:_log_setup():334] Logging user logs to W:\shared\python\gymrl\wandb\run-20211216_135102-eif3qu4f\logs\debug.log
+2021-12-16 13:51:02,162 INFO    Thread-221:6412 [wandb_init.py:_log_setup():335] Logging internal logs to W:\shared\python\gymrl\wandb\run-20211216_135102-eif3qu4f\logs\debug-internal.log
+2021-12-16 13:51:02,162 INFO    Thread-221:6412 [wandb_init.py:_jupyter_setup():285] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x0000017520A7CD00>
+2021-12-16 13:51:02,162 INFO    Thread-221:6412 [wandb_init.py:init():367] calling init triggers
+2021-12-16 13:51:02,162 INFO    Thread-221:6412 [wandb_init.py:init():372] wandb.init called with sweep_config: {'dropout': 0, 'epochs': 5, 'fp_emax': 115, 'fp_explim': 'CPFLOAT_EXPRANGE_STOR', 'fp_flip': 'CPFLOAT_NO_SOFTERR', 'fp_p': 0.12229014077837908, 'fp_precision': 19, 'fp_round': 'CPFLOAT_NO_RND', 'fp_subnormal': 'CPFLOAT_SUBN_USE', 'layer_sizes': [784, 30, 10], 'learning_rate': 0.1, 'loss': 'mean_squared_error', 'minibatch_size': 10, 'momentum_coefficient': 0, 'weight_decay': 0.0001}
+config: {}
+2021-12-16 13:51:02,162 INFO    Thread-221:6412 [wandb_init.py:init():416] starting backend
+2021-12-16 13:51:02,163 INFO    Thread-221:6412 [backend.py:_multiprocessing_setup():69] multiprocessing start_methods=spawn, using: spawn
+2021-12-16 13:51:02,164 INFO    Thread-221:6412 [backend.py:ensure_launched():123] starting backend process...
+2021-12-16 13:51:02,231 INFO    Thread-221:6412 [backend.py:ensure_launched():127] started backend process with pid: 15156
+2021-12-16 13:51:02,232 INFO    Thread-221:6412 [wandb_init.py:init():421] backend started and connected
+2021-12-16 13:51:02,241 INFO    Thread-221:6412 [wandb_run.py:_config_callback():733] config_cb None None {'dropout': 0, 'epochs': 5, 'fp_emax': 115, 'fp_explim': 'CPFLOAT_EXPRANGE_STOR', 'fp_flip': 'CPFLOAT_NO_SOFTERR', 'fp_p': 0.12229014077837908, 'fp_precision': 19, 'fp_round': 'CPFLOAT_NO_RND', 'fp_subnormal': 'CPFLOAT_SUBN_USE', 'layer_sizes': [784, 30, 10], 'learning_rate': 0.1, 'loss': 'mean_squared_error', 'minibatch_size': 10, 'momentum_coefficient': 0, 'weight_decay': 0.0001}
+2021-12-16 13:51:02,241 INFO    Thread-221:6412 [wandb_init.py:init():461] updated telemetry
+2021-12-16 13:51:02,242 INFO    Thread-221:6412 [wandb_init.py:init():480] communicating current version
+2021-12-16 13:51:03,166 INFO    Thread-221:6412 [wandb_init.py:init():485] got version response upgrade_message: "wandb version 0.12.7 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2021-12-16 13:51:03,166 INFO    Thread-221:6412 [wandb_init.py:init():493] communicating run to backend with 30 second timeout
+2021-12-16 13:51:03,523 INFO    Thread-221:6412 [wandb_init.py:init():518] starting run threads in backend
+2021-12-16 13:51:03,700 INFO    Thread-221:6412 [wandb_run.py:_console_start():1476] atexit reg
+2021-12-16 13:51:03,701 INFO    Thread-221:6412 [wandb_run.py:_redirect():1339] redirect: SettingsConsole.WRAP
+2021-12-16 13:51:03,701 INFO    Thread-221:6412 [wandb_run.py:_redirect():1374] Wrapping output streams.
+2021-12-16 13:51:03,701 INFO    Thread-221:6412 [wandb_run.py:_redirect():1390] Redirects installed.
+2021-12-16 13:51:03,701 INFO    Thread-221:6412 [wandb_init.py:init():542] run started, returning control to user process
+2021-12-16 13:53:40,369 ERROR   Thread-28 :6412 [retry.py:__call__():111] Retry attempt failed:
+Traceback (most recent call last):
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py", line 445, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py", line 440, in _make_request
+    httplib_response = conn.getresponse()
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\http\client.py", line 1347, in getresponse
+    response.begin()
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\http\client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\http\client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\requests\adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\util\retry.py", line 531, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\packages\six.py", line 734, in reraise
+    raise value.with_traceback(tb)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py", line 445, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py", line 440, in _make_request
+    httplib_response = conn.getresponse()
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\http\client.py", line 1347, in getresponse
+    response.begin()
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\http\client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\http\client.py", line 276, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\wandb\old\retry.py", line 96, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\wandb\sdk\internal\internal_api.py", line 123, in execute
+    return self.client.execute(*args, **kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\wandb\vendor\gql-0.2.0\gql\client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\wandb\vendor\gql-0.2.0\gql\client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\wandb\vendor\gql-0.2.0\gql\transport\requests.py", line 38, in execute
+    request = requests.post(self.url, **post_args)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\requests\api.py", line 119, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\requests\api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\requests\sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\requests\sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "c:\users\lubko\appdata\local\programs\python\python39\lib\site-packages\requests\adapters.py", line 498, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2021-12-16 13:54:58,468 INFO    Thread-221:6412 [wandb_run.py:finish():1135] finishing run lubomirkurcak/my-test-project/eif3qu4f

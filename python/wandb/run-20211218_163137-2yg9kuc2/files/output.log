@@ -1,0 +1,33 @@
+cpfloat_validate_optstruct returned 0
+Epoch 0/5 Batch 0/6000 Cost 2.614110 LR 0.100000
+Epoch 0/5 Batch 1024/6000 Cost 0.515957 LR 0.100000
+Epoch 0/5 Batch 2048/6000 Cost 0.328759 LR 0.100000
+Epoch 0/5 Batch 3072/6000 Cost 0.511711 LR 0.100000
+Epoch 0/5 Batch 4096/6000 Cost 0.440308 LR 0.100000
+Epoch 0/5 Batch 5120/6000 Cost 0.387940 LR 0.100000
+Epoch 0/5 Correct 8761/10000 Best 8761(0)Epoch 1/5 Batch 0/6000 Cost 0.182774 LR 0.100000
+Epoch 1/5 Batch 1024/6000 Cost 0.337201 LR 0.100000
+Epoch 1/5 Batch 2048/6000 Cost 0.184926 LR 0.100000
+Epoch 1/5 Batch 3072/6000 Cost 0.478353 LR 0.100000
+Epoch 1/5 Batch 4096/6000 Cost 0.317277 LR 0.100000
+Epoch 1/5 Batch 5120/6000 Cost 0.377534 LR 0.100000
+Epoch 1/5 Correct 8900/10000 Best 8900(0)Epoch 2/5 Batch 0/6000 Cost 0.131322 LR 0.100000
+Epoch 2/5 Batch 1024/6000 Cost 0.287011 LR 0.100000
+Epoch 2/5 Batch 2048/6000 Cost 0.144882 LR 0.100000
+Epoch 2/5 Batch 3072/6000 Cost 0.459349 LR 0.100000
+Epoch 2/5 Batch 4096/6000 Cost 0.259437 LR 0.100000
+Epoch 2/5 Batch 5120/6000 Cost 0.360793 LR 0.100000
+Epoch 2/5 Correct 8908/10000 Best 8908(0)Epoch 3/5 Batch 0/6000 Cost 0.138138 LR 0.100000
+Epoch 3/5 Batch 1024/6000 Cost 0.249069 LR 0.100000
+Epoch 3/5 Batch 2048/6000 Cost 0.170187 LR 0.100000
+Epoch 3/5 Batch 3072/6000 Cost 0.367359 LR 0.100000
+Epoch 3/5 Batch 4096/6000 Cost 0.281125 LR 0.100000
+Epoch 3/5 Batch 5120/6000 Cost 0.355626 LR 0.100000
+Epoch 3/5 Correct 8924/10000 Best 8924(0)Epoch 4/5 Batch 0/6000 Cost 0.137722 LR 0.100000
+Epoch 4/5 Batch 1024/6000 Cost 0.280198 LR 0.100000
+Epoch 4/5 Batch 2048/6000 Cost 0.161472 LR 0.100000
+Epoch 4/5 Batch 3072/6000 Cost 0.364075 LR 0.100000
+Epoch 4/5 Batch 4096/6000 Cost 0.290060 LR 0.100000
+wandb: Network error (SSLError), entering retry loop. See W:\shared\python\gymrl\wandb\run-20211218_163137-2yg9kuc2\logs\debug-internal.log for full traceback.
+Epoch 4/5 Batch 5120/6000 Cost 0.355755 LR 0.100000
+Epoch 4/5 Correct 8955/10000 Best 8955(0)

@@ -1,0 +1,33 @@
+cpfloat_validate_optstruct returned 0
+Epoch 0/5 Batch 0/6000 Cost 3.577451 LR 0.100000
+Epoch 0/5 Batch 1024/6000 Cost 0.344141 LR 0.100000
+Epoch 0/5 Batch 2048/6000 Cost 0.114158 LR 0.100000
+Epoch 0/5 Batch 3072/6000 Cost 0.351855 LR 0.100000
+Epoch 0/5 Batch 4096/6000 Cost 0.317351 LR 0.100000
+Epoch 0/5 Batch 5120/6000 Cost 0.245324 LR 0.100000
+Epoch 0/5 Correct 8909/10000 Best 8909(0)Epoch 1/5 Batch 0/6000 Cost 0.082781 LR 0.100000
+Epoch 1/5 Batch 1024/6000 Cost 0.314072 LR 0.100000
+Epoch 1/5 Batch 2048/6000 Cost 0.090585 LR 0.100000
+Epoch 1/5 Batch 3072/6000 Cost 0.313201 LR 0.100000
+Epoch 1/5 Batch 4096/6000 Cost 0.261261 LR 0.100000
+Epoch 1/5 Batch 5120/6000 Cost 0.214407 LR 0.100000
+Epoch 1/5 Correct 9003/10000 Best 9003(0)Epoch 2/5 Batch 0/6000 Cost 0.078117 LR 0.100000
+Epoch 2/5 Batch 1024/6000 Cost 0.303554 LR 0.100000
+Epoch 2/5 Batch 2048/6000 Cost 0.087224 LR 0.100000
+Epoch 2/5 Batch 3072/6000 Cost 0.317008 LR 0.100000
+Epoch 2/5 Batch 4096/6000 Cost 0.245803 LR 0.100000
+Epoch 2/5 Batch 5120/6000 Cost 0.205806 LR 0.100000
+Epoch 2/5 Correct 9045/10000 Best 9045(0)Epoch 3/5 Batch 0/6000 Cost 0.084756 LR 0.100000
+Epoch 3/5 Batch 1024/6000 Cost 0.303901 LR 0.100000
+Epoch 3/5 Batch 2048/6000 Cost 0.084479 LR 0.100000
+Epoch 3/5 Batch 3072/6000 Cost 0.288131 LR 0.100000
+wandb: Network error (SSLError), entering retry loop. See W:\shared\python\gymrl\wandb\run-20211216_165258-5nk85pjg\logs\debug-internal.log for full traceback.
+Epoch 3/5 Batch 4096/6000 Cost 0.245575 LR 0.100000
+Epoch 3/5 Batch 5120/6000 Cost 0.178206 LR 0.100000
+Epoch 3/5 Correct 9045/10000 Best 9045(1)Epoch 4/5 Batch 0/6000 Cost 0.086206 LR 0.100000
+Epoch 4/5 Batch 1024/6000 Cost 0.296627 LR 0.100000
+Epoch 4/5 Batch 2048/6000 Cost 0.084143 LR 0.100000
+Epoch 4/5 Batch 3072/6000 Cost 0.292665 LR 0.100000
+Epoch 4/5 Batch 4096/6000 Cost 0.241805 LR 0.100000
+Epoch 4/5 Batch 5120/6000 Cost 0.164206 LR 0.100000
+Epoch 4/5 Correct 9071/10000 Best 9071(0)

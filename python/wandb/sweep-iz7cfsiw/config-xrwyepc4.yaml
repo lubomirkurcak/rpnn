@@ -1,0 +1,24 @@
+wandb_version: 1
+
+architecture:
+  value: gru
+batch_size:
+  value: 91
+currency:
+  value: usd
+dropout_p:
+  value: 0.5
+epochs:
+  value: 5
+layer_units:
+  value: 32
+learning_rate:
+  value: 0.00770005306222723
+loss:
+  value: mean_squared_error
+optimizer:
+  value: sgd
+scaler_range:
+  value:
+  - 0
+  - 1

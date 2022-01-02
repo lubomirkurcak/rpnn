@@ -1,0 +1,26 @@
+2021-12-15 21:52:04,323 INFO    Thread-24 :10564 [wandb_setup.py:_flush():69] setting env: {'project': 'my-test-project', 'entity': 'lubomirkurcak', 'root_dir': 'W:\\shared\\python\\gymrl', 'sweep_id': 'iz7cfsiw', 'run_id': 'xrwyepc4', 'sweep_param_path': 'W:\\shared\\python\\gymrl\\wandb\\sweep-iz7cfsiw\\config-xrwyepc4.yaml'}
+2021-12-15 21:52:04,323 INFO    Thread-24 :10564 [wandb_setup.py:_flush():69] setting login settings: {}
+2021-12-15 21:52:04,324 INFO    Thread-24 :10564 [wandb_init.py:_log_setup():334] Logging user logs to W:\shared\python\gymrl\wandb\run-20211215_215204-xrwyepc4\logs\debug.log
+2021-12-15 21:52:04,324 INFO    Thread-24 :10564 [wandb_init.py:_log_setup():335] Logging internal logs to W:\shared\python\gymrl\wandb\run-20211215_215204-xrwyepc4\logs\debug-internal.log
+2021-12-15 21:52:04,324 INFO    Thread-24 :10564 [wandb_init.py:_jupyter_setup():285] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x000001986177EE50>
+2021-12-15 21:52:04,325 INFO    Thread-24 :10564 [wandb_init.py:init():367] calling init triggers
+2021-12-15 21:52:04,325 INFO    Thread-24 :10564 [wandb_init.py:init():372] wandb.init called with sweep_config: {'architecture': 'gru', 'batch_size': 91, 'currency': 'usd', 'dropout_p': 0.5, 'epochs': 5, 'layer_units': 32, 'learning_rate': 0.00770005306222723, 'loss': 'mean_squared_error', 'optimizer': 'sgd', 'scaler_range': [0, 1]}
+config: {}
+2021-12-15 21:52:04,325 INFO    Thread-24 :10564 [wandb_init.py:init():416] starting backend
+2021-12-15 21:52:04,325 INFO    Thread-24 :10564 [backend.py:_multiprocessing_setup():69] multiprocessing start_methods=spawn, using: spawn
+2021-12-15 21:52:04,327 INFO    Thread-24 :10564 [backend.py:ensure_launched():123] starting backend process...
+2021-12-15 21:52:04,426 INFO    Thread-24 :10564 [backend.py:ensure_launched():127] started backend process with pid: 6864
+2021-12-15 21:52:04,426 INFO    Thread-24 :10564 [wandb_init.py:init():421] backend started and connected
+2021-12-15 21:52:04,437 INFO    Thread-24 :10564 [wandb_run.py:_config_callback():733] config_cb None None {'architecture': 'gru', 'batch_size': 91, 'currency': 'usd', 'dropout_p': 0.5, 'epochs': 5, 'layer_units': 32, 'learning_rate': 0.00770005306222723, 'loss': 'mean_squared_error', 'optimizer': 'sgd', 'scaler_range': [0, 1]}
+2021-12-15 21:52:04,437 INFO    Thread-24 :10564 [wandb_init.py:init():461] updated telemetry
+2021-12-15 21:52:04,438 INFO    Thread-24 :10564 [wandb_init.py:init():480] communicating current version
+2021-12-15 21:52:05,484 INFO    Thread-24 :10564 [wandb_init.py:init():485] got version response upgrade_message: "wandb version 0.12.7 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2021-12-15 21:52:05,485 INFO    Thread-24 :10564 [wandb_init.py:init():493] communicating run to backend with 30 second timeout
+2021-12-15 21:52:05,861 INFO    Thread-24 :10564 [wandb_init.py:init():518] starting run threads in backend
+2021-12-15 21:52:06,040 INFO    Thread-24 :10564 [wandb_run.py:_console_start():1476] atexit reg
+2021-12-15 21:52:06,041 INFO    Thread-24 :10564 [wandb_run.py:_redirect():1339] redirect: SettingsConsole.WRAP
+2021-12-15 21:52:06,041 INFO    Thread-24 :10564 [wandb_run.py:_redirect():1374] Wrapping output streams.
+2021-12-15 21:52:06,041 INFO    Thread-24 :10564 [wandb_run.py:_redirect():1390] Redirects installed.
+2021-12-15 21:52:06,041 INFO    Thread-24 :10564 [wandb_init.py:init():542] run started, returning control to user process
+2021-12-15 21:53:04,954 INFO    Thread-24 :10564 [wandb_run.py:finish():1135] finishing run lubomirkurcak/my-test-project/xrwyepc4

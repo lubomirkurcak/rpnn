@@ -1,0 +1,66 @@
+2021-12-15 22:03:16,796 INFO    MainThread:6724 [internal.py:wandb_internal():88] W&B internal server running at pid: 6724, started at: 2021-12-15 22:03:16.791175
+2021-12-15 22:03:16,797 INFO    WriterThread:6724 [datastore.py:open_for_write():77] open: W:\shared\python\gymrl\wandb\run-20211215_220315-gk2kjnxj\run-gk2kjnxj.wandb
+2021-12-15 22:03:16,798 DEBUG   HandlerThread:6724 [handler.py:handle_request():101] handle_request: check_version
+2021-12-15 22:03:16,799 DEBUG   SenderThread:6724 [sender.py:send():122] send: header
+2021-12-15 22:03:16,799 DEBUG   SenderThread:6724 [sender.py:send():122] send: request
+2021-12-15 22:03:16,799 DEBUG   SenderThread:6724 [sender.py:send_request():131] send_request: check_version
+2021-12-15 22:03:16,934 DEBUG   SenderThread:6724 [sender.py:send():122] send: run
+2021-12-15 22:03:17,298 INFO    SenderThread:6724 [sender.py:_start_run_threads():596] run started: gk2kjnxj with start time 1639602195
+2021-12-15 22:03:17,298 DEBUG   SenderThread:6724 [sender.py:send():122] send: summary
+2021-12-15 22:03:17,299 DEBUG   HandlerThread:6724 [handler.py:handle_request():101] handle_request: run_start
+2021-12-15 22:03:17,299 INFO    SenderThread:6724 [sender.py:_save_file():730] saving file wandb-summary.json with policy end
+2021-12-15 22:03:17,309 DEBUG   HandlerThread:6724 [meta.py:__init__():34] meta init
+2021-12-15 22:03:17,309 DEBUG   HandlerThread:6724 [meta.py:__init__():48] meta init done
+2021-12-15 22:03:17,309 DEBUG   HandlerThread:6724 [meta.py:probe():190] probe
+2021-12-15 22:03:17,322 DEBUG   HandlerThread:6724 [meta.py:_setup_git():180] setup git
+2021-12-15 22:03:17,394 DEBUG   HandlerThread:6724 [meta.py:_setup_git():187] setup git done
+2021-12-15 22:03:17,395 DEBUG   HandlerThread:6724 [meta.py:_save_pip():52] save pip
+2021-12-15 22:03:17,395 DEBUG   HandlerThread:6724 [meta.py:_save_pip():66] save pip done
+2021-12-15 22:03:17,395 DEBUG   HandlerThread:6724 [meta.py:probe():231] probe done
+2021-12-15 22:03:17,506 DEBUG   SenderThread:6724 [sender.py:send():122] send: files
+2021-12-15 22:03:17,506 DEBUG   HandlerThread:6724 [handler.py:handle_request():101] handle_request: status
+2021-12-15 22:03:17,506 INFO    SenderThread:6724 [sender.py:_save_file():730] saving file wandb-metadata.json with policy now
+2021-12-15 22:03:17,507 DEBUG   SenderThread:6724 [sender.py:send():122] send: request
+2021-12-15 22:03:17,507 DEBUG   SenderThread:6724 [sender.py:send_request():131] send_request: status
+2021-12-15 22:03:21,016 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:03:25,891 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:03:30,764 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:03:32,751 DEBUG   HandlerThread:6724 [handler.py:handle_request():101] handle_request: status
+2021-12-15 22:03:32,752 DEBUG   SenderThread:6724 [sender.py:send():122] send: request
+2021-12-15 22:03:32,752 DEBUG   SenderThread:6724 [sender.py:send_request():131] send_request: status
+2021-12-15 22:03:45,895 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:03:45,895 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:03:45,896 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:03:50,353 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:03:55,261 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:04:00,170 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:04:00,899 DEBUG   HandlerThread:6724 [handler.py:handle_request():101] handle_request: status
+2021-12-15 22:04:00,899 DEBUG   SenderThread:6724 [sender.py:send():122] send: request
+2021-12-15 22:04:00,899 DEBUG   SenderThread:6724 [sender.py:send_request():131] send_request: status
+2021-12-15 22:04:05,062 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:04:09,950 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:04:14,823 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:04:16,128 DEBUG   HandlerThread:6724 [handler.py:handle_request():101] handle_request: status
+2021-12-15 22:04:16,128 DEBUG   SenderThread:6724 [sender.py:send():122] send: request
+2021-12-15 22:04:16,128 DEBUG   SenderThread:6724 [sender.py:send_request():131] send_request: status
+2021-12-15 22:04:23,029 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:04:24,623 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:04:29,518 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:04:34,415 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:04:38,034 DEBUG   HandlerThread:6724 [handler.py:handle_request():101] handle_request: status
+2021-12-15 22:04:38,035 DEBUG   SenderThread:6724 [sender.py:send():122] send: request
+2021-12-15 22:04:38,035 DEBUG   SenderThread:6724 [sender.py:send_request():131] send_request: status
+2021-12-15 22:04:39,326 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:04:44,229 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:04:49,114 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:04:53,313 DEBUG   HandlerThread:6724 [handler.py:handle_request():101] handle_request: status
+2021-12-15 22:04:53,313 DEBUG   SenderThread:6724 [sender.py:send():122] send: request
+2021-12-15 22:04:53,313 DEBUG   SenderThread:6724 [sender.py:send_request():131] send_request: status
+2021-12-15 22:04:54,562 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:04:58,945 DEBUG   SenderThread:6724 [sender.py:send():122] send: stats
+2021-12-15 22:05:02,566 WARNING MainThread:6724 [internal.py:is_dead():343] Internal process exiting, parent pid 4344 disappeared
+2021-12-15 22:05:02,566 ERROR   MainThread:6724 [internal.py:wandb_internal():142] Internal process shutdown.
+2021-12-15 22:05:02,974 INFO    SenderThread:6724 [sender.py:finish():833] shutting down sender
+2021-12-15 22:05:02,974 INFO    WriterThread:6724 [datastore.py:close():258] close: W:\shared\python\gymrl\wandb\run-20211215_220315-gk2kjnxj\run-gk2kjnxj.wandb
+2021-12-15 22:05:02,974 INFO    HandlerThread:6724 [handler.py:finish():535] shutting down handler
+2021-12-15 22:05:05,766 INFO    MainThread:6724 [internal.py:handle_exit():78] Internal process exited
