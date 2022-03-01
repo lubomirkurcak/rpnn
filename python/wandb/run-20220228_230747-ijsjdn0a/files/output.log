@@ -1,0 +1,33 @@
+cpfloat_validate_optstruct returned 0
+Epoch 0/5 Batch 0/6000 Cost 3.352559 LR 0.100000
+Epoch 0/5 Batch 1024/6000 Cost 0.354798 LR 0.100000
+Epoch 0/5 Batch 2048/6000 Cost 0.156883 LR 0.100000
+Epoch 0/5 Batch 3072/6000 Cost 0.382306 LR 0.100000
+Epoch 0/5 Batch 4096/6000 Cost 0.275959 LR 0.100000
+Epoch 0/5 Batch 5120/6000 Cost 0.316326 LR 0.100000
+Epoch 0/5 Correct 8607/10000 Best 8607(0)Epoch 1/5 Batch 0/6000 Cost 0.149037 LR 0.100000
+Epoch 1/5 Batch 1024/6000 Cost 0.296515 LR 0.100000
+Epoch 1/5 Batch 2048/6000 Cost 0.140518 LR 0.100000
+Epoch 1/5 Batch 3072/6000 Cost 0.365844 LR 0.100000
+Epoch 1/5 Batch 4096/6000 Cost 0.284159 LR 0.100000
+Epoch 1/5 Batch 5120/6000 Cost 0.320088 LR 0.100000
+Epoch 1/5 Correct 8616/10000 Best 8616(0)Epoch 2/5 Batch 0/6000 Cost 0.148936 LR 0.100000
+Epoch 2/5 Batch 1024/6000 Cost 0.302968 LR 0.100000
+Epoch 2/5 Batch 2048/6000 Cost 0.141113 LR 0.100000
+Epoch 2/5 Batch 3072/6000 Cost 0.365654 LR 0.100000
+Epoch 2/5 Batch 4096/6000 Cost 0.285698 LR 0.100000
+Epoch 2/5 Batch 5120/6000 Cost 0.322041 LR 0.100000
+Epoch 2/5 Correct 8621/10000 Best 8621(0)Epoch 3/5 Batch 0/6000 Cost 0.147758 LR 0.100000
+Epoch 3/5 Batch 1024/6000 Cost 0.306055 LR 0.100000
+Epoch 3/5 Batch 2048/6000 Cost 0.143205 LR 0.100000
+Epoch 3/5 Batch 3072/6000 Cost 0.360361 LR 0.100000
+Epoch 3/5 Batch 4096/6000 Cost 0.285522 LR 0.100000
+wandb: Network error (SSLError), entering retry loop. See W:\rpnn\python\wandb\run-20220228_230747-ijsjdn0a\logs\debug-internal.log for full traceback.
+Epoch 3/5 Batch 5120/6000 Cost 0.305485 LR 0.100000
+Epoch 3/5 Correct 8612/10000 Best 8621(1)Epoch 4/5 Batch 0/6000 Cost 0.146110 LR 0.100000
+Epoch 4/5 Batch 1024/6000 Cost 0.301175 LR 0.100000
+Epoch 4/5 Batch 2048/6000 Cost 0.141607 LR 0.100000
+Epoch 4/5 Batch 3072/6000 Cost 0.362563 LR 0.100000
+Epoch 4/5 Batch 4096/6000 Cost 0.282871 LR 0.100000
+Epoch 4/5 Batch 5120/6000 Cost 0.303081 LR 0.100000
+Epoch 4/5 Correct 8615/10000 Best 8621(2)

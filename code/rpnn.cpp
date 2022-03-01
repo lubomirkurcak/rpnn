@@ -99,8 +99,13 @@ internal int neural_net_test(
     int retval = cpfloat_validate_optstruct(fpopts);
     PySys_WriteStdout("The validation function returned %d.\n", retval);
     #endif
-  
-    Neural_Network _net = neural_net_parametrized(layer_count, layer_sizes, learning_rate, weight_decay, dropout, /*idx.elements, */momentum_coefficient, fpopts);
+
+    optstruct *forward_fpopts = fpopts;
+    optstruct *backprop_fpopts = fpopts;
+    optstruct *update_fpopts = fpopts;
+    
+    Neural_Network _net = neural_net_parametrized(layer_count, layer_sizes, learning_rate, weight_decay, dropout, /*idx.elements, */momentum_coefficient,
+                                                  forward_fpopts, backprop_fpopts, update_fpopts);
     Neural_Network *net = &_net;
 
     //save(net);
@@ -115,8 +120,12 @@ internal int neural_net_test(
     return correctly_classified_after_training;
 }
 
+#include "unit_tests.h"
+
 int main(int argc, char *argv[])
 {
+    unit_tests_run();
+    
     // Set neural net parameters
     int layer_sizes[] = {784, 30, 10};
     int layer_count = ArrayCount(layer_sizes);

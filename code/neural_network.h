@@ -24,6 +24,23 @@ struct matrix
     buffer allocation;
 };
 
+internal void print_matrix(matrix A)
+{
+    Assert(A.layers == 1);
+    Assert(A.features == 1);
+    double *A_values = (double *)A.allocation.memory;
+    
+    for(int i=0; i<A.height; ++i)
+    {
+        for(int j=0; j<A.width; ++j)
+        {
+            printf("%3.1lf ", *A_values);
+            ++A_values;
+        }
+        printf("\n");
+    }
+}
+
 // STUDY NOTE(lubo):
 // It would be kinda nice to have a regular matrix struct because it could be used very generally
 // For neural nets we need specific extensions (matrix layers + arrays of them)
@@ -145,6 +162,47 @@ internal matrix transpose_vector(matrix A)
 
     return result;
 }
+
+// NOTE(lubo): Adapted cache-oblivious transpose by mariolpantunes
+// from https://stackoverflow.com/questions/5200338/a-cache-efficient-matrix-transpose-program
+inline void cachetranspose(int rb, int re, int cb, int ce,
+                           double *T_values, double *A_values,
+                           int A_rows, int A_columns) {
+    int r = re - rb, c = ce - cb;
+    if (r <= 16 && c <= 16) {
+        for (int i = rb; i < re; i++) {
+            for (int j = cb; j < ce; j++) {
+                T_values[j * A_rows + i] = A_values[i * A_columns + j];
+            }
+        }
+    } else if (r >= c) {
+        cachetranspose(rb, rb + (r / 2), cb, ce, T_values, A_values, A_rows, A_columns);
+        cachetranspose(rb + (r / 2), re, cb, ce, T_values, A_values, A_rows, A_columns);
+    } else {
+        cachetranspose(rb, re, cb, cb + (c / 2), T_values, A_values, A_rows, A_columns);
+        cachetranspose(rb, re, cb + (c / 2), ce, T_values, A_values, A_rows, A_columns);
+    }
+}
+
+internal void transpose(matrix R, matrix A)
+{
+    Assert(R.width == A.height);
+    Assert(R.height == A.width);
+    Assert(A.layers == 1);
+    Assert(A.features == 1);
+    Assert(R.layers == 1);
+    Assert(R.features == 1);
+    cachetranspose(0, A.height, 0, A.width,
+                   (double *)R.allocation.memory, (double *)A.allocation.memory,
+                   A.height, A.width);
+}
+
+internal matrix transpose(matrix A)
+{
+    matrix R = create_matrix(A.width, A.height);
+    transpose(R, A);
+    return R;
+};
 
 // NOTE(lubo): Creates a matrix w such that multiplication w*A is
 // defined and will produce matrix of the same size as B.
@@ -898,6 +956,27 @@ internal double matrix_sum(matrix A)
     return result;
 }
 
+internal bool matrices_are_equal(matrix A, matrix B)
+{
+    bool result =
+        A.width == B.width &&
+        A.height == B.height &&
+        A.layers == B.layers &&
+        A.features == B.features;
+    
+    if(result)
+    {
+        Assert(A.allocation.size == B.allocation.size);
+        result = (memcmp(A.allocation.memory, B.allocation.memory, A.allocation.size) == 0);
+    }
+    else
+    {
+        Assert(A.allocation.size != B.allocation.size);
+    }
+
+    return result;
+}
+
 internal double matrix_l2(matrix A)
 {
     double result = reduce(A, MOP_L2);
@@ -1077,7 +1156,10 @@ struct Neural_Network
     int layer_count; // TODO(lubo): Do we want to keep this?
     Random_Series random_series;
 
-    optstruct *fpopts; // NOTE(lubo): This struct neither allocates nor deallocates this
+    // NOTE(lubo): This struct neither allocates nor deallocates this
+    optstruct *forward_fpopts;
+    optstruct *backprop_fpopts;
+    optstruct *update_fpopts;
 
     // IDX_File train_set;
     // IDX_File train_labels;

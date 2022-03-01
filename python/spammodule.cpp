@@ -102,7 +102,12 @@ internal int neural_net_test(
     PySys_WriteStdout("The validation function returned %d.\n", retval);
 	#endif
   
-    Neural_Network _net = neural_net_parametrized(layer_count, layer_sizes, learning_rate, weight_decay, dropout, /*idx.elements, */momentum_coefficient, fpopts);
+    optstruct *forward_fpopts = fpopts;
+    optstruct *backprop_fpopts = fpopts;
+    optstruct *update_fpopts = fpopts;
+	
+    Neural_Network _net = neural_net_parametrized(layer_count, layer_sizes, learning_rate, weight_decay, dropout, /*idx.elements, */momentum_coefficient,
+                                                  forward_fpopts, backprop_fpopts, update_fpopts);
     Neural_Network *net = &_net;
 
     //save(net);
@@ -116,7 +121,6 @@ internal int neural_net_test(
 			  
     return correctly_classified_after_training;
 }
-
 
 static PyObject *SpamError;
 
@@ -206,31 +210,15 @@ spam_reduce_precision(PyObject *self, PyObject *args)
     return PyFloat_FromDouble((float64)result);
 }
 
-#if false
 static PyObject *
-create_forward_net(PyObject *self, PyObject *args)
+spam_matrix_factorization(PyObject *self, PyObject *args, PyObject *keywds)
 {
-    PyObject *py_tuple;
-    if(!PyArg_ParseTuple(args, "O", &py_tuple)) return NULL;
-
-    Py_ssize_t layer_count_Py_ssize_t = PyTuple_Size(py_tuple);
-    int layer_count = safecast_to_int(layer_count_Py_ssize_t);
-    int *layer_sizes = (int *)malloc(layer_count*sizeof(int));
-    for(int i=0; i<layer_count; ++i)
-    {
-        layer_sizes[i] = (int)PyLong_AsLong(PyTuple_GetItem(py_tuple, i));
-    }
-
-    int correctly_classified_after_training = neural_net_test(layer_count, layer_sizes);
-
-    free(layer_sizes);
-    
-    return PyLong_FromLong(correctly_classified_after_training);
+	PyErr_SetString(SpamError, "Hi");
+	return NULL;
 }
-#endif
 
 static PyObject *
-mlp_classifier(PyObject *self, PyObject *args, PyObject *keywds)
+spam_mlp_classifier(PyObject *self, PyObject *args, PyObject *keywds)
 {
 	/*char *foo = "fooarg";
 	char *bar = "bararg";
@@ -459,7 +447,8 @@ static PyMethodDef SpamMethods[] = {
     {"system",  spam_system, METH_VARARGS, "Execute a shell command."},
     {"reduce_precision",  spam_reduce_precision, METH_VARARGS, "reduce_precision"},
     //{"create_forward_net",  create_forward_net, METH_VARARGS, "create_forward_net"},
-    {"mlp_classifier",  (PyCFunction)mlp_classifier, METH_VARARGS | METH_KEYWORDS, "mlp_classifier"},
+    {"mlp_classifier",  (PyCFunction)spam_mlp_classifier, METH_VARARGS | METH_KEYWORDS, "mlp_classifier"},
+    {"matrix_factorization",  (PyCFunction)spam_matrix_factorization, METH_VARARGS | METH_KEYWORDS, "matrix_factorization"},
 
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };
