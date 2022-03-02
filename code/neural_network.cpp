@@ -7,18 +7,13 @@
    ======================================================================== */
 
 internal Neural_Network
-neural_net_parametrized(int layer_count, int *layer_sizes, double learning_rate, double weight_decay, double dropout, /*int tranining_set_size=10000, */double momentum_coefficient,
-                        optstruct *forward_fpopts, optstruct *backprop_fpopts, optstruct *update_fpopts)
+create_feedforward_net(Neural_Network_Hyperparams *params, int layer_count, int *layer_sizes)
 {
     Neural_Network net = {};
-    
+
+    net.params = params;
     net.layer_count = layer_count;
     //net.layer_sizes = layer_sizes;
-    net.random_series = create_random_series();
-
-    net.forward_fpopts = forward_fpopts;
-    net.backprop_fpopts = backprop_fpopts;
-    net.update_fpopts = update_fpopts;
     
     matrix input = create_column_vector(layer_sizes[0]);
     append_to_list(&net.activations, input);
@@ -32,7 +27,7 @@ neural_net_parametrized(int layer_count, int *layer_sizes, double learning_rate,
         matrix layer_z = create_matrix(layer_a);
         matrix weights = create_connection_matrix(previous_layer, layer_a);
         matrix biases = create_matrix(layer_a);
-        randomize_values(&net.random_series, weights);
+        randomize_values(&net.params->random_series, weights);
         clear(biases);
         
         append_to_list(&net.activations, layer_a);
@@ -68,30 +63,8 @@ neural_net_parametrized(int layer_count, int *layer_sizes, double learning_rate,
 
     net.input = get_by_index(&net.activations, 0);
     net.prediction = get_by_index(&net.activations, layer_count-1);
-
-    net.learning_rate = learning_rate;
-    net.weight_decay = weight_decay;
-    net.dropout = dropout;
-    //net.size_of_training_set = tranining_set_size;
-    net.momentum_coefficient = momentum_coefficient;
     
     return net;
-}
-
-internal Neural_Network
-simple_neural_net_parametrized(int layer_count, int *layer_sizes, double learning_rate)
-{
-    double weight_decay=0;
-    double dropout=0;
-    double momentum_coefficient=0;
-    optstruct *forward_fpopts=0;
-    optstruct *backprop_fpopts=0;
-    optstruct *update_fpopts=0;
-    Neural_Network result =
-        neural_net_parametrized(layer_count, layer_sizes, learning_rate, weight_decay, dropout, momentum_coefficient,
-                                forward_fpopts, backprop_fpopts, update_fpopts);
-
-    return result;
 }
 
 internal void incinerate(Neural_Network *net)
@@ -122,9 +95,11 @@ internal void incinerate(Neural_Network *net)
 
 internal void reinitialize_weights_and_biases(Neural_Network *net)
 {
+    auto series = &net->params->random_series;
+    
     foreach_by_value(matrix w, &net->weights)
     {
-        randomize_values(&net->random_series, w);
+        randomize_values(series, w);
     }
 
     foreach_by_value(matrix b, &net->biases)
@@ -145,16 +120,16 @@ internal void feedforward(Neural_Network *net, b32x use_dropout=false)
         matrix biases = get_by_index(&net->biases, layer_index);
         
         multiply(z, weights, previous_layer);
-        reduce_precision(z, net->forward_fpopts);
+        reduce_precision(z, &net->params->forward_fpopts);
         add(z, biases);
-        reduce_precision(z, net->forward_fpopts);
+        reduce_precision(z, &net->params->forward_fpopts);
         
         if(layer_index == net->layer_count-2)
         {
             if(net->last_layer_softmax)
             {
                 softmax(current_layer, z);
-                reduce_precision(z, net->forward_fpopts);
+                reduce_precision(z, &net->params->forward_fpopts);
             }
             else
             {
@@ -180,13 +155,13 @@ internal double calculate_cost(Neural_Network *net)
     double base_cost = cost(net->prediction, net->expected_output);
 
     double weights_cost = 0;
-    if(net->weight_decay > 0/* && net->size_of_training_set > 0*/)
+    if(net->params->weight_decay > 0/* && net->size_of_training_set > 0*/)
     {
         for(int layer_index=net->layer_count-2; layer_index>=0; --layer_index)
         {
             matrix weights = get_by_index(&net->del_weights, layer_index);
             //weights_cost += net->weight_decay/(2*net->size_of_training_set)*matrix_l2(weights);
-            weights_cost += net->weight_decay*matrix_l2(weights);
+            weights_cost += net->params->weight_decay*matrix_l2(weights);
         }
     }
 
@@ -196,9 +171,10 @@ internal double calculate_cost(Neural_Network *net)
 
 internal void create_dropouts(Neural_Network *net)
 {
-    double inv_p = 1/(1-net->dropout);
+    auto series = &net->params->random_series;
+    double inv_p = 1/(1-net->params->dropout);
     
-    double dropout_chance = net->dropout;
+    double dropout_chance = net->params->dropout;
     for(int layer_index=0; layer_index<net->layer_count-2; ++layer_index)
     {
         matrix dropout = get_by_index(&net->dropouts, layer_index);
@@ -212,7 +188,7 @@ internal void create_dropouts(Neural_Network *net)
                 {
                     for(int j=0; j<dropout.width; ++j)
                     {
-                        *values = probability((float)dropout_chance, &net->random_series) ? inv_p : 0.0;
+                        *values = probability((float)dropout_chance, series) ? inv_p : 0.0;
             
                         ++values;
                     }
@@ -225,7 +201,7 @@ internal void create_dropouts(Neural_Network *net)
 // NOTE(lubo): Calculates gradient, does not update weights
 internal void backprop(Neural_Network *net)
 {
-    b32x use_dropout = net->dropout > 0;
+    b32x use_dropout = net->params->dropout > 0;
     if(use_dropout)
     {
         create_dropouts(net);
@@ -237,7 +213,7 @@ internal void backprop(Neural_Network *net)
     
     matrix delta = create_matrix(output);
     dcost(delta, output, net->expected_output);
-    reduce_precision(delta, net->backprop_fpopts);
+    reduce_precision(delta, &net->params->backprop_fpopts);
 
     for(int layer_index=net->layer_count-2; layer_index>=0; --layer_index)
     {
@@ -253,7 +229,7 @@ internal void backprop(Neural_Network *net)
             // NOTE(lubo): Transpose magic transform so we don't need to transpose non-vector matrices
             // multiply(delta, transpose(weights3), delta);
             matrix new_delta = transpose_vector(transpose_vector(delta) * weights);
-            reduce_precision(new_delta, net->backprop_fpopts);
+            reduce_precision(new_delta, &net->params->backprop_fpopts);
             incinerate(delta);
             delta = new_delta;
         }
@@ -279,7 +255,7 @@ internal void backprop(Neural_Network *net)
         
         copy_matrix(del_biases, delta);
         multiply(del_weights, delta, transpose_vector(activation));
-        reduce_precision(del_weights, net->backprop_fpopts);
+        reduce_precision(del_weights, &net->params->backprop_fpopts);
     }
     
     incinerate(delta);
@@ -312,13 +288,13 @@ internal void accumulate_update(Neural_Network *net, int minibatch_size)
         matrix avg_del_weights = get_by_index(&net->avg_del_weights, layer_index);
                     
         multiply(del_biases, 1/(double)minibatch_size);
-        reduce_precision(del_biases, net->update_fpopts);
+        reduce_precision(del_biases, &net->params->update_fpopts);
         multiply(del_weights, 1/(double)minibatch_size);
-        reduce_precision(del_weights, net->update_fpopts);
+        reduce_precision(del_weights, &net->params->update_fpopts);
         add(avg_del_biases, del_biases);
-        reduce_precision(avg_del_biases, net->update_fpopts);
+        reduce_precision(avg_del_biases, &net->params->update_fpopts);
         add(avg_del_weights, del_weights);
-        reduce_precision(avg_del_weights, net->update_fpopts);
+        reduce_precision(avg_del_weights, &net->params->update_fpopts);
     }
 }
 
@@ -334,41 +310,41 @@ internal void apply_updates(Neural_Network *net)
         matrix avg_del_biases = get_by_index(&net->avg_del_biases, layer_index);
         matrix avg_del_weights = get_by_index(&net->avg_del_weights, layer_index);
 
-        if(net->weight_decay > 0/* && net->size_of_training_set > 0*/)
+        if(net->params->weight_decay > 0/* && net->size_of_training_set > 0*/)
         {
             //double decay_step = net->learning_rate*(net->weight_decay/net->size_of_training_set);
-            double decay_step = net->learning_rate*net->weight_decay;
+            double decay_step = net->params->learning_rate*net->params->weight_decay;
             decay_l2(weights, decay_step);
-            reduce_precision(weights, net->update_fpopts);
+            reduce_precision(weights, &net->params->update_fpopts);
             //decay_l1(weights, decay_step);
         }
                 
-        multiply(avg_del_biases, -net->learning_rate);
-        reduce_precision(avg_del_biases, net->update_fpopts);
-        multiply(avg_del_weights, -net->learning_rate);
-        reduce_precision(avg_del_weights, net->update_fpopts);
+        multiply(avg_del_biases, -net->params->learning_rate);
+        reduce_precision(avg_del_biases, &net->params->update_fpopts);
+        multiply(avg_del_weights, -net->params->learning_rate);
+        reduce_precision(avg_del_weights, &net->params->update_fpopts);
 
-        if(net->momentum_coefficient)
+        if(net->params->momentum_coefficient)
         {
-            multiply(vel_biases, net->momentum_coefficient);
-            reduce_precision(vel_biases, net->update_fpopts);
-            multiply(vel_weights, net->momentum_coefficient);
-            reduce_precision(vel_weights, net->update_fpopts);
+            multiply(vel_biases, net->params->momentum_coefficient);
+            reduce_precision(vel_biases, &net->params->update_fpopts);
+            multiply(vel_weights, net->params->momentum_coefficient);
+            reduce_precision(vel_weights, &net->params->update_fpopts);
             add(vel_biases, avg_del_biases);
-            reduce_precision(vel_biases, net->update_fpopts);
+            reduce_precision(vel_biases, &net->params->update_fpopts);
             add(vel_weights, avg_del_weights);
-            reduce_precision(vel_weights, net->update_fpopts);
+            reduce_precision(vel_weights, &net->params->update_fpopts);
             add(biases, vel_biases);
-            reduce_precision(biases, net->update_fpopts);
+            reduce_precision(biases, &net->params->update_fpopts);
             add(weights, vel_weights);
-            reduce_precision(weights, net->update_fpopts);
+            reduce_precision(weights, &net->params->update_fpopts);
         }
         else
         {
             add(biases, avg_del_biases);
-            reduce_precision(biases, net->update_fpopts);
+            reduce_precision(biases, &net->params->update_fpopts);
             add(weights, avg_del_weights);
-            reduce_precision(weights, net->update_fpopts);
+            reduce_precision(weights, &net->params->update_fpopts);
         }
         
         clear(avg_del_biases);
@@ -428,7 +404,7 @@ internal int train_idx(Neural_Network *net,
                     read++;
                     write++;
                 }
-                reduce_precision(input, net->forward_fpopts);
+                reduce_precision(input, &net->params->forward_fpopts);
 
                 // NOTE(lubo): Backprop
                 backprop(net);
@@ -446,9 +422,9 @@ internal int train_idx(Neural_Network *net,
             if(print_this_batch)
             {
                 #ifdef PY_SSIZE_T_CLEAN
-                PySys_WriteStdout("Epoch %d/%d Batch %d/%d Cost %f LR %f\n", epoch, epochs, batch_index, batch_count, avg_batch_cost, net->learning_rate);
+                PySys_WriteStdout("Epoch %d/%d Batch %d/%d Cost %f LR %f\n", epoch, epochs, batch_index, batch_count, avg_batch_cost, net->params->learning_rate);
                 #endif
-                loginfo("neural_net", "Epoch %d/%d Batch %d/%d Cost %f LR %f", epoch, epochs, batch_index, batch_count, avg_batch_cost, net->learning_rate);
+                loginfo("neural_net", "Epoch %d/%d Batch %d/%d Cost %f LR %f", epoch, epochs, batch_index, batch_count, avg_batch_cost, net->params->learning_rate);
             }
 
             apply_updates(net);
@@ -478,7 +454,7 @@ internal int train_idx(Neural_Network *net,
                 read++;
                 write++;
             }
-            reduce_precision(input, net->forward_fpopts);
+            reduce_precision(input, &net->params->forward_fpopts);
 
             feedforward(net);
             
@@ -543,13 +519,8 @@ internal void load(Neural_Network *net)
 }
 
 // NOTE(lubo): Given the matrix expected_R, calculate A and B such that A*B ~= expected_R
-void matrix_factorization(matrix expected_R, int features, int epochs, float learning_rate)
+float64 matrix_factorization(Neural_Network_Hyperparams *params, matrix expected_R, int features, int epochs, b32x non_negative)
 {
-    Neural_Network _net = {};
-    Neural_Network *net = &_net;
-    net->random_series = create_random_series();
-    net->learning_rate = learning_rate;
-
     matrix A = create_matrix(expected_R.height, features);
     matrix B = create_matrix(features, expected_R.width);
 
@@ -563,15 +534,19 @@ void matrix_factorization(matrix expected_R, int features, int epochs, float lea
     Assert(R.width == expected_R.width);
     Assert(R.height == expected_R.height);
     
-    randomize_values(&net->random_series, A);
-    randomize_values(&net->random_series, B);
+    randomize_values(&params->random_series, A);
+    randomize_values(&params->random_series, B);
 
-    scalar_op(A, A, MOP_ADD, 10);
-    scalar_op(B, B, MOP_ADD, 10);
+    if(non_negative)
+    {
+        absolute_value(A);
+        absolute_value(B);
+    }
     
     for(int epoch=0; epoch<epochs; ++epoch)
     {
         multiply(R, A, B);
+        reduce_precision(R, &params->forward_fpopts);
 
         if((epoch % 1024) == 0)
         {
@@ -579,24 +554,38 @@ void matrix_factorization(matrix expected_R, int features, int epochs, float lea
         }
         
         dcost(R, R, expected_R);
+        reduce_precision(R, &params->backprop_fpopts);
         
         transpose(AT, A);
         transpose(BT, B);
 
         multiply(A_grad, R, BT);
         multiply(B_grad, AT, R);
+        reduce_precision(A_grad, &params->backprop_fpopts);
+        reduce_precision(B_grad, &params->backprop_fpopts);
 
-        multiply(A_grad, -net->learning_rate);
-        multiply(B_grad, -net->learning_rate);
+        multiply(A_grad, -params->learning_rate);
+        multiply(B_grad, -params->learning_rate);
+        reduce_precision(A_grad, &params->update_fpopts);
+        reduce_precision(B_grad, &params->update_fpopts);
 
         add(A, A_grad);
         add(B, B_grad);
+        reduce_precision(A, &params->update_fpopts);
+        reduce_precision(B, &params->update_fpopts);
 
-        scalar_op(A, A, MOP_MAX, 0);
-        scalar_op(B, B, MOP_MAX, 0);
+        // NOTE(lubo): We could just call relu, but wouldn't that be confusing?
+        if(non_negative)
+        {
+            scalar_op(A, A, MOP_MAX, 0);
+            scalar_op(B, B, MOP_MAX, 0);
+        }
     }
-    multiply(R, A, B);
 
+    multiply(R, A, B);
+    reduce_precision(R, &params->forward_fpopts);
+
+    #if false
     print_matrix(A);
     printf("\n");
     print_matrix(B);
@@ -605,6 +594,9 @@ void matrix_factorization(matrix expected_R, int features, int epochs, float lea
     printf("\n");
     print_matrix(expected_R);
     printf("\n");
+    #endif
 
-    printf("Final cost: %lf\n", cost(R, expected_R));
+    float64 final_cost = cost(R, expected_R);
+    printf("Final cost: %lf\n", final_cost);
+    return final_cost;
 }

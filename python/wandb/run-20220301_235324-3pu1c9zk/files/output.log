@@ -1,0 +1,98 @@
+{'method': 'random',
+ 'metric': {'goal': 'minimize', 'name': 'squared_error'},
+ 'parameters': {'dropout': {'value': 0},
+                'epochs': {'value': 50000},
+                'features': {'value': 25},
+                'fp_emax': {'distribution': 'q_uniform',
+                            'max': 127,
+                            'min': 4,
+                            'q': 1},
+                'fp_explim': {'values': ['CPFLOAT_EXPRANGE_STOR',
+                                         'CPFLOAT_EXPRANGE_TARG']},
+                'fp_flip': {'values': ['CPFLOAT_NO_SOFTERR',
+                                       'CPFLOAT_SOFTERR']},
+                'fp_p': {'distribution': 'uniform', 'max': 0.5, 'min': 0},
+                'fp_precision': {'distribution': 'q_uniform',
+                                 'max': 24,
+                                 'min': 4,
+                                 'q': 1},
+                'fp_round': {'values': ['CPFLOAT_RND_NA',
+                                        'CPFLOAT_RND_NZ',
+                                        'CPFLOAT_RND_NE',
+                                        'CPFLOAT_RND_TP',
+                                        'CPFLOAT_RND_TN',
+                                        'CPFLOAT_RND_TZ',
+                                        'CPFLOAT_RND_SP',
+                                        'CPFLOAT_RND_SE',
+                                        'CPFLOAT_RND_OD',
+                                        'CPFLOAT_NO_RND']},
+                'fp_subnormal': {'values': ['CPFLOAT_SUBN_RND',
+                                            'CPFLOAT_SUBN_USE']},
+                'learning_rate': {'value': 0.001},
+                'loss': {'value': 'mean_squared_error'},
+                'momentum_coefficient': {'value': 0},
+                'non_negative': {'value': 1},
+                'weight_decay': {'value': 0.0001}}}
+wandb: WARNING Calling wandb.login() after wandb.init() has no effect.
+Create sweep with ID: moov5s0w
+Sweep URL: https://wandb.ai/lubomirkurcak/matrix-factorization/sweeps/moov5s0w
+wandb: WARNING Calling wandb.login() after wandb.init() has no effect.
+wandb: Agent Starting Run: ni4v3gv7 with config:
+wandb: 	dropout: 0
+wandb: 	epochs: 50000
+wandb: 	features: 25
+wandb: 	fp_emax: 50
+wandb: 	fp_explim: CPFLOAT_EXPRANGE_STOR
+wandb: 	fp_flip: CPFLOAT_NO_SOFTERR
+wandb: 	fp_p: 0.4553489526223733
+wandb: 	fp_precision: 13
+wandb: 	fp_round: CPFLOAT_RND_TZ
+wandb: 	fp_subnormal: CPFLOAT_SUBN_RND
+wandb: 	learning_rate: 0.001
+wandb: 	loss: mean_squared_error
+wandb: 	momentum_coefficient: 0
+wandb: 	non_negative: 1
+wandb: 	weight_decay: 0.0001
+wandb: wandb version 0.12.11 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: ERROR Run ni4v3gv7 errored: TypeError("'int' object is not iterable")
+wandb: Agent Starting Run: mfz78loy with config:
+wandb: 	dropout: 0
+wandb: 	epochs: 50000
+wandb: 	features: 25
+wandb: 	fp_emax: 33
+wandb: 	fp_explim: CPFLOAT_EXPRANGE_STOR
+wandb: 	fp_flip: CPFLOAT_SOFTERR
+wandb: 	fp_p: 0.3955502430473371
+wandb: 	fp_precision: 24
+wandb: 	fp_round: CPFLOAT_RND_SP
+wandb: 	fp_subnormal: CPFLOAT_SUBN_USE
+wandb: 	learning_rate: 0.001
+wandb: 	loss: mean_squared_error
+wandb: 	momentum_coefficient: 0
+wandb: 	non_negative: 1
+wandb: 	weight_decay: 0.0001
+wandb: wandb version 0.12.11 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: ERROR Run mfz78loy errored: TypeError("'int' object is not iterable")
+wandb: Agent Starting Run: bm72rvwv with config:
+wandb: 	dropout: 0
+wandb: 	epochs: 50000
+wandb: 	features: 25
+wandb: 	fp_emax: 30
+wandb: 	fp_explim: CPFLOAT_EXPRANGE_TARG
+wandb: 	fp_flip: CPFLOAT_NO_SOFTERR
+wandb: 	fp_p: 0.43625404915192983
+wandb: 	fp_precision: 10
+wandb: 	fp_round: CPFLOAT_NO_RND
+wandb: 	fp_subnormal: CPFLOAT_SUBN_USE
+wandb: 	learning_rate: 0.001
+wandb: 	loss: mean_squared_error
+wandb: 	momentum_coefficient: 0
+wandb: 	non_negative: 1
+wandb: 	weight_decay: 0.0001
+wandb: wandb version 0.12.11 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: ERROR Run bm72rvwv errored: TypeError("'int' object is not iterable")
+wandb: ERROR Detected 3 failed runs in the first 60 seconds, killing sweep.
+wandb: To disable this check set WANDB_AGENT_DISABLE_FLAPPING=true

@@ -1,0 +1,2 @@
+{'dropout': 0, 'epochs': 50000, 'features': 25, 'fp_emax': 118, 'fp_explim': 'CPFLOAT_EXPRANGE_TARG', 'fp_flip': 'CPFLOAT_SOFTERR', 'fp_p': 0.39221783420511663, 'fp_precision': 19, 'fp_round': 'CPFLOAT_RND_SE', 'fp_subnormal': 'CPFLOAT_SUBN_RND', 'learning_rate': 0.001, 'loss': 'mean_squared_error', 'momentum_coefficient': 0, 'non_negative': 1, 'weight_decay': 0.0001}
+cpfloat_validate_optstruct returned 0

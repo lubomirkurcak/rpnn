@@ -393,6 +393,7 @@ enum Matrix_Ops
     MOP_EQ,
     MOP_GTE,
     MOP_LTE,
+    MOP_ABS,
 
     MOP_EXP,
     MOP_LN,
@@ -461,6 +462,7 @@ scalar_op(matrix R, matrix A, int op, double param=0,
                 case MOP_EQ: *R_values = (*A_values == param) ? (double)1 : (double)0; break;
                 case MOP_GTE: *R_values = (*A_values >= param) ? (double)1 : (double)0; break;
                 case MOP_LTE: *R_values = (*A_values <= param) ? (double)1 : (double)0; break;
+                case MOP_ABS: *R_values = Abs(*A_values); break;
 
                 case MOP_EXP: *R_values = exp(*A_values); break;
                 case MOP_LN: *R_values = log(*A_values); break;
@@ -1009,6 +1011,16 @@ internal void drelu(matrix A)
     drelu(A, A);
 }
 
+internal void absolute_value(matrix R, matrix A)
+{
+    scalar_op(R, A, MOP_ABS);
+}
+
+internal void absolute_value(matrix A)
+{
+    absolute_value(A, A);
+}
+
 // internal double sigmoid(double x)
 // {
 //     double result = 1/(1+exp(-x));
@@ -1150,17 +1162,80 @@ internal void reduce_precision(matrix A, optstruct *fpopts)
 
 // TODO(lubo): Load input/expected output function callbacks?
 
+struct Neural_Network_Hyperparams
+{
+    Random_Series random_series;
+    double learning_rate;
+    double weight_decay;
+    double dropout;
+    double momentum_coefficient;
+
+    optstruct forward_fpopts;
+    optstruct backprop_fpopts;
+    optstruct update_fpopts;
+};
+
+// NOTE(lubo): Default example setting
+inline optstruct precision_binary16()
+{
+    optstruct fpopts = {};
+  
+    // Set up the parameters for binary16 target format.
+    fpopts.precision = 11;                 // Bits in the significand + 1.
+    fpopts.emax = 15;                      // The maximum exponent value.
+    fpopts.subnormal = CPFLOAT_SUBN_USE;   // Support for subnormals is on.
+    fpopts.round = CPFLOAT_RND_TP;        // Round toward +infinity.
+    fpopts.flip = CPFLOAT_NO_SOFTERR;      // Bit flips are off.
+    fpopts.p = 0;                          // Bit flip probability (not used).
+    fpopts.explim = CPFLOAT_EXPRANGE_TARG; // Limited exponent in target format.
+
+    return fpopts;
+}
+
+// NOTE(lubo): Another example precision specification (bfloat16)
+inline optstruct precision_bfloat16()
+{
+    optstruct fpopts = {};
+  
+    fpopts.precision = 8;
+    fpopts.emax = 127;
+    fpopts.subnormal = CPFLOAT_SUBN_USE;
+    fpopts.round = CPFLOAT_RND_SE;
+    fpopts.flip = CPFLOAT_NO_SOFTERR;
+    fpopts.explim = CPFLOAT_EXPRANGE_TARG;
+
+    return fpopts;
+}
+
+// NOTE(lubo): Full precision (no rounding)
+inline optstruct precision_full()
+{
+    optstruct fpopts = {};
+    fpopts.round = CPFLOAT_NO_RND;
+    fpopts.explim = CPFLOAT_EXPRANGE_TARG;
+    return fpopts;
+}
+
+inline Neural_Network_Hyperparams default_hyperparams()
+{
+    Neural_Network_Hyperparams result = {};
+    result.random_series = create_random_series();
+    result.learning_rate = 0.1f;
+    result.forward_fpopts = precision_full();
+    result.backprop_fpopts = precision_full();
+    result.update_fpopts = precision_full();
+
+    return result;
+}
+
 // NOTE(lubo): Neural network
 struct Neural_Network
 {
-    int layer_count; // TODO(lubo): Do we want to keep this?
-    Random_Series random_series;
-
-    // NOTE(lubo): This struct neither allocates nor deallocates this
-    optstruct *forward_fpopts;
-    optstruct *backprop_fpopts;
-    optstruct *update_fpopts;
-
+    // TODO(lubo): __restrict probably non-standard. Sadly, there's no compiler option to ALWAYS assume non-aliased pointers.
+    Neural_Network_Hyperparams *__restrict params;
+    
+    int layer_count;
+    
     // IDX_File train_set;
     // IDX_File train_labels;
     // IDX_File test_set;
@@ -1168,13 +1243,6 @@ struct Neural_Network
 
     // NOTE(lubo): Last layer can be softmax or no activation
     b32x last_layer_softmax;
-    
-    // TODO(lubo): Size of the training set, used to divide weight_decay, do we want to use it?
-    double learning_rate;
-    double weight_decay;
-    double dropout;
-    //int size_of_training_set;
-    double momentum_coefficient;
     
     matrix expected_output;
     matrix prediction; // NOTE(lubo): Points to last activation layer, just for convenience

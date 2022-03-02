@@ -8,6 +8,32 @@
 #include "neural_network.cpp"
 
 
+
+
+/*
+
+
+
+
+
+
+               IMPORTANT NOTE(lubo):
+
+
+                      If you want to debug C code called from python, you CAN NOT USE WANDB, the breakpoints will not be hit!!!
+					  
+                      Instead, call the module functions directly.
+
+
+
+
+
+
+
+*/
+
+
+
 //#undef true
 //#undef false
 
@@ -17,14 +43,10 @@ global Loaded_Bitmap global_debug_mnist_test_bitmap;
 
 // TODO(lubo): Artificially expanding the training data regularization
 internal int neural_net_test(
-    optstruct *fpopts,
+    Neural_Network_Hyperparams *params,
     int layer_count, int *layer_sizes,
-	int epochs = 30,
-    int minibatch_size = 10,
-    float learning_rate = 0.1f,
-    float weight_decay = 0,
-    float dropout = 0,
-    float momentum_coefficient = 0)
+    int epochs = 30,
+    int minibatch_size = 10)
 {
     buffer train_set_file = read_entire_file(String("data\\mnist\\train-images.idx3-ubyte"));
     buffer train_labels_file = read_entire_file(String("data\\mnist\\train-labels.idx1-ubyte"));
@@ -65,49 +87,8 @@ internal int neural_net_test(
             }
         }
     }
-
-	#if false
-    // NOTE(lubo): These settings get about 94.5% on MNIST
-    //int layer_sizes[] = {train_set.element_size, 30, 10};
-    int epochs = 30;
-    int minibatch_size = 10;
-    float learning_rate = 0.1f;    
-    float weight_decay = 5.0f/train_set.elements;
-    float dropout = 0;
-    float momentum_coefficient = 0;
-
-	epochs = 1;
-	#endif
-	
-	
-    // learning_rate = 0.01f;
-    // epochs = 60;
-    // momentum_coefficient = 0.05f;
-	
-	#if false
-	// NOTE(lubo): Precision reduce options
-    optstruct *fpopts = init_optstruct();
-  
-    // Set up the parameters for binary16 target format.
-    fpopts->precision = 11;                 // Bits in the significand + 1.
-    fpopts->emax = 15;                      // The maximum exponent value.
-    fpopts->subnormal = CPFLOAT_SUBN_USE;   // Support for subnormals is on.
-    fpopts ->round = CPFLOAT_RND_TP;        // Round toward +infinity.
-    fpopts->flip = CPFLOAT_NO_SOFTERR;      // Bit flips are off.
-    fpopts->p = 0;                          // Bit flip probability (not used).
-    fpopts->explim = CPFLOAT_EXPRANGE_TARG; // Limited exponent in target format.
-  
-    // Validate the parameters in fpopts.
-    int retval = cpfloat_validate_optstruct(fpopts);
-    PySys_WriteStdout("The validation function returned %d.\n", retval);
-	#endif
-  
-    optstruct *forward_fpopts = fpopts;
-    optstruct *backprop_fpopts = fpopts;
-    optstruct *update_fpopts = fpopts;
-	
-    Neural_Network _net = neural_net_parametrized(layer_count, layer_sizes, learning_rate, weight_decay, dropout, /*idx.elements, */momentum_coefficient,
-                                                  forward_fpopts, backprop_fpopts, update_fpopts);
+    
+    Neural_Network _net = create_feedforward_net(params, layer_count, layer_sizes);
     Neural_Network *net = &_net;
 
     //save(net);
@@ -117,8 +98,8 @@ internal int neural_net_test(
               test_set, test_labels,
               epochs, minibatch_size);
 
-	incinerate(net);
-			  
+    incinerate(net);
+              
     return correctly_classified_after_training;
 }
 
@@ -138,59 +119,7 @@ spam_system(PyObject *self, PyObject *args)
         return NULL;
     }
     
-    //neural_net_test();
     return PyLong_FromLong(sts);
-}
-
-int cpfloat_test()
-{
-    // Allocate the data structure for target formats and rounding parameters.
-    optstruct *fpopts = init_optstruct();
-  
-    // Set up the parameters for binary16 target format.
-    fpopts->precision = 11;                 // Bits in the significand + 1.
-    fpopts->emax = 15;                      // The maximum exponent value.
-    fpopts->subnormal = CPFLOAT_SUBN_USE;   // Support for subnormals is on.
-    fpopts ->round = CPFLOAT_RND_TP;        // Round toward +infinity.
-    fpopts->flip = CPFLOAT_NO_SOFTERR;      // Bit flips are off.
-    fpopts->p = 0;                          // Bit flip probability (not used).
-    fpopts->explim = CPFLOAT_EXPRANGE_TARG; // Limited exponent in target format.
-  
-    // Validate the parameters in fpopts.
-    int retval = cpfloat_validate_optstruct(fpopts);
-    PySys_WriteStdout("The validation function returned %d.\n", retval);
-  
-#define M_PI 3.14159265358979323846264338327950288
-#define M_E 2.71828182845904523536
-#define M_SQRT2 1.41421356237309504880
-
-    // Initialize a 2x2 matrix with four arbitrary elements
-    double X[4] = { (double)1/3, M_PI, M_E, M_SQRT2 };
-    double Y[4];
-    PySys_WriteStdout("Values in binary64:\n %.15e %.15e\n %.15e %.15e \n",
-           X[0], X[1], X[2], X[3]);
-  
-    // Round the values of X to the binary16 format and store in Y
-    cpfloat(&Y[0], &X[0], 4, fpopts);
-    PySys_WriteStdout("Rounded to binary16:\n %.15e %.15e\n %.15e %.15e \n",
-           Y[0], Y[1], Y[2], Y[3]);
-  
-    // Set the precision of the significand to 8 bits,
-    // and the maximum exponent to 127, which gives the bfloat16 format
-    fpopts ->precision = 8;
-    fpopts ->emax = 127;
-  
-    // Round the values of X to the bfloat16 and store in Y
-    cpfloat(&Y[0], &X[0], 4, fpopts);
-    PySys_WriteStdout("Rounded to bfloat16:\n %.15e %.15e\n %.15e %.15e \n",
-                       Y[0], Y[1], Y[2], Y[3]);
-  
-    cpfloat(&X[0], &X[0], 4, fpopts);
-    PySys_WriteStdout("Rounded to bfloat16:\n %.15e %.15e\n %.15e %.15e \n",
-                       X[0], X[1], X[2], X[3]);
-    free_optstruct(fpopts);
-  
-    return 0;
 }
 
 static PyObject *
@@ -201,109 +130,16 @@ spam_reduce_precision(PyObject *self, PyObject *args)
 
     if (!PyArg_ParseTuple(args, "f|f", &value, &precision))
         return NULL;
-
-	float result = 1337;
-    //float result = reduce_precision_log(value, (float)pow(2, precision));
     
-	cpfloat_test();
-	
-    return PyFloat_FromDouble((float64)result);
+    return PyFloat_FromDouble((float64)value*precision);
 }
 
-static PyObject *
-spam_matrix_factorization(PyObject *self, PyObject *args, PyObject *keywds)
+static bool set_fpopts_by_names(optstruct *fpopts,
+    char *subnormal_enum,
+	char *round_enum,
+	char *flip_enum,
+	char *explim_enum)
 {
-	PyErr_SetString(SpamError, "Hi");
-	return NULL;
-}
-
-static PyObject *
-spam_mlp_classifier(PyObject *self, PyObject *args, PyObject *keywds)
-{
-	/*char *foo = "fooarg";
-	char *bar = "bararg";
-    char *baz = "bazarg";*/
-	
-    PyObject *layer_sizes_tuple;
-	
-	int epochs = 30;
-    int minibatch_size = 10;
-    float learning_rate = 0.1f;    
-    float weight_decay = 0.0001f; //5.0f/train_set.elements;
-    float dropout = 0;
-    float momentum_coefficient = 0;
-	
-    // Allocate the data structure for target formats and rounding parameters.
-    optstruct *fpopts = init_optstruct();
-  
-    // Set up the parameters for binary16 target format.
-    fpopts->precision = 11;                 // Bits in the significand + 1.
-    fpopts->emax = 15;                      // The maximum exponent value.
-    fpopts->subnormal = CPFLOAT_SUBN_USE;   // Support for subnormals is on.
-    fpopts->round = CPFLOAT_RND_TP;        // Round toward +infinity.
-    fpopts->flip = CPFLOAT_NO_SOFTERR;      // Bit flips are off.
-    fpopts->p = 0;                          // Bit flip probability (not used).
-    fpopts->explim = CPFLOAT_EXPRANGE_TARG; // Limited exponent in target format.
-  
-    char *subnormal_enum = "CPFLOAT_SUBN_USE";
-	char *round_enum = "CPFLOAT_RND_TP";
-	char *flip_enum = "CPFLOAT_NO_SOFTERR";
-	char *explim_enum = "CPFLOAT_EXPRANGE_TARG";
-	
-	//static char *kwlist[] = {"foo", "bar", "baz", NULL};
-	static char *kwlist[] = {
-		"layer_sizes",
-		"epochs",
-		"minibatch_size",
-		"learning_rate",
-		"weight_decay",
-		"dropout",
-		"momentum_coefficient",
-		"fp_precision",
-		"fp_emax",
-		"fp_subnormal",
-		"fp_round",
-		"fp_flip",
-		"fp_p",
-		"fp_explim",
-		NULL};
-		
-	//if (!PyArg_ParseTupleAndKeywords(args, keywds, "|sss", kwlist, &foo, &bar, &baz)) return NULL;
-	if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|iiffffiisssfs:mlp_classifier", kwlist, 
-		&layer_sizes_tuple,
-		&epochs, 
-		&minibatch_size,
-		&learning_rate,
-		&weight_decay,
-		&dropout,
-		&momentum_coefficient,
-		&fpopts->precision,
-		&fpopts->emax,
-		&subnormal_enum,
-		&round_enum,
-		&flip_enum,
-		&fpopts->p,
-		&explim_enum)) 
-	{
-		//PyErr_SetString(SpamError, "Incorrect arguments");
-		return NULL;
-	}
-
-	if(layer_sizes_tuple == NULL)
-	{
-		PyErr_SetString(SpamError, "Layer sizes not provided");
-		return NULL;
-	}
-	
-    Py_ssize_t layer_count_Py_ssize_t = PyTuple_Size(layer_sizes_tuple);
-    int layer_count = safecast_to_int(layer_count_Py_ssize_t);
-    int *layer_sizes = (int *)malloc(layer_count*sizeof(int));
-    for(int i=0; i<layer_count; ++i)
-    {
-        layer_sizes[i] = (int)PyLong_AsLong(PyTuple_GetItem(layer_sizes_tuple, i));
-		//PySys_WriteStdout("Layer %d size: %d\n", i, layer_sizes[i]);
-    }
-
 	if(strcmp(subnormal_enum, "CPFLOAT_SUBN_RND") == 0)
 	{
 		fpopts->subnormal = CPFLOAT_SUBN_RND;
@@ -315,7 +151,7 @@ spam_mlp_classifier(PyObject *self, PyObject *args, PyObject *keywds)
 	else
 	{
 		PyErr_SetString(SpamError, "Invalid subnormal argument");//("Invalid subnormal argument: %s\n", subnormal_enum);
-		return NULL;
+		return false;
 	}
 	
 	if(strcmp(round_enum, "CPFLOAT_RND_NA") == 0)
@@ -361,7 +197,7 @@ spam_mlp_classifier(PyObject *self, PyObject *args, PyObject *keywds)
 	else
 	{
 		PyErr_SetString(SpamError, "Invalid round argument");//PySys_WriteStdout("Invalid round argument: %s\n", round_enum);
-		return NULL;
+		return false;
 	}
 	
 	if(strcmp(flip_enum, "CPFLOAT_NO_SOFTERR") == 0)
@@ -375,7 +211,7 @@ spam_mlp_classifier(PyObject *self, PyObject *args, PyObject *keywds)
 	else
 	{
 		PyErr_SetString(SpamError, "Invalid flip argument");//PySys_WriteStdout("Invalid flip argument: %s\n", flip_enum);
-		return NULL;
+		return false;
 	}
 	
 	if(strcmp(explim_enum, "CPFLOAT_EXPRANGE_STOR") == 0)
@@ -389,57 +225,184 @@ spam_mlp_classifier(PyObject *self, PyObject *args, PyObject *keywds)
 	else
 	{
 		PyErr_SetString(SpamError, "Invalid explim argument");//PySys_WriteStdout("Invalid explim argument: %s\n", explim_enum);
+		return false;
+	}
+	
+	return true;
+}
+
+static PyObject *
+spam_matrix_factorization(PyObject *self, PyObject *args, PyObject *keywds)
+{
+    Neural_Network_Hyperparams params = default_hyperparams();
+	
+	int features = 10;
+	int epochs = 30;
+	int non_negative = true;
+	
+    optstruct fpopts = precision_full();
+  
+    char *subnormal_enum = "CPFLOAT_SUBN_USE";
+	char *round_enum = "CPFLOAT_RND_TP";
+	char *flip_enum = "CPFLOAT_NO_SOFTERR";
+	char *explim_enum = "CPFLOAT_EXPRANGE_TARG";
+	
+	static char *kwlist[] = {
+		"features",
+		"epochs",
+		"non_negative",
+		"learning_rate",
+		"weight_decay",
+		"dropout",
+		"momentum_coefficient",
+		"fp_precision",
+		"fp_emax",
+		"fp_subnormal",
+		"fp_round",
+		"fp_flip",
+		"fp_p",
+		"fp_explim",
+		NULL};
+		
+	if (!PyArg_ParseTupleAndKeywords(args, keywds, "|iiiddddiisssfs:matrix_factorization", kwlist, 
+		&features,
+		&epochs, 
+		&non_negative,
+		&params.learning_rate,
+		&params.weight_decay,
+		&params.dropout,
+		&params.momentum_coefficient,
+		&fpopts.precision,
+		&fpopts.emax,
+		&subnormal_enum,
+		&round_enum,
+		&flip_enum,
+		&fpopts.p,
+		&explim_enum)) 
+	{
+		return NULL;
+	}
+
+	if(!set_fpopts_by_names(&fpopts, subnormal_enum, round_enum, flip_enum, explim_enum)) return NULL;
+    PySys_WriteStdout("cpfloat_validate_optstruct returned %d\n", cpfloat_validate_optstruct(&fpopts));
+	
+    params.forward_fpopts = fpopts;
+    params.backprop_fpopts = fpopts;
+    params.update_fpopts = fpopts;
+	
+    // NOTE(lubo): Uniformly random integers from [1, 5]
+    double _C[] =
+    {
+        5, 2, 5, 4, 1, 5, 5, 3, 1, 3, 2, 4, 5, 2, 3, 1, 4, 3, 5, 3, 1, 2, 5, 4, 3, 5, 5, 3, 3, 1, 2, 1, 4, 5, 5, 1, 2, 3, 1, 5, 1, 3, 2, 1, 2, 3, 3, 2, 2, 1,
+        4, 5, 4, 1, 4, 1, 3, 4, 3, 4, 2, 2, 4, 2, 1, 3, 2, 3, 1, 2, 2, 1, 3, 5, 3, 2, 2, 5, 2, 1, 5, 5, 2, 3, 1, 3, 1, 2, 5, 1, 1, 1, 4, 1, 2, 3, 5, 3, 5, 2,
+        1, 3, 5, 3, 4, 3, 5, 5, 1, 5, 5, 5, 5, 1, 5, 3, 2, 3, 1, 5, 4, 4, 3, 3, 1, 4, 1, 2, 4, 5, 1, 3, 3, 2, 3, 5, 5, 4, 4, 1, 5, 1, 4, 5, 2, 4, 5, 4, 5, 4,
+        5, 2, 2, 3, 3, 5, 2, 3, 4, 5, 1, 4, 3, 2, 2, 4, 4, 3, 4, 3, 2, 1, 2, 5, 4, 1, 4, 5, 5, 1, 2, 4, 2, 5, 3, 1, 3, 4, 3, 4, 2, 5, 2, 4, 3, 3, 4, 5, 1, 1,
+        2, 5, 1, 1, 1, 2, 2, 2, 1, 2, 1, 4, 5, 5, 4, 2, 4, 1, 5, 3, 3, 4, 1, 4, 1, 5, 4, 3, 5, 1, 3, 4, 2, 1, 5, 1, 1, 2, 1, 5, 4, 4, 4, 2, 1, 2, 1, 2, 3, 5,
+        2, 5, 5, 5, 5, 5, 2, 2, 3, 5, 3, 2, 3, 5, 5, 3, 3, 3, 2, 4, 3, 2, 4, 5, 1, 4, 2, 1, 5, 2, 4, 3, 3, 4, 5, 2, 5, 3, 3, 3, 3, 2, 3, 2, 4, 3, 3, 3, 4, 2,
+        5, 3, 1, 3, 2, 1, 4, 5, 4, 5, 4, 2, 4, 3, 2, 1, 4, 5, 4, 3, 1, 5, 1, 2, 4, 2, 1, 3, 2, 5, 4, 5, 3, 5, 1, 2, 3, 1, 4, 5, 5, 1, 1, 3, 2, 5, 2, 1, 1, 1,
+        2, 4, 4, 1, 5, 1, 4, 4, 1, 5, 3, 3, 4, 3, 1, 3, 4, 1, 2, 5, 3, 4, 5, 5, 4, 3, 3, 5, 1, 5, 4, 4, 3, 4, 5, 5, 4, 1, 4, 4, 3, 2, 3, 5, 5, 5, 3, 3, 1, 4,
+        3, 1, 2, 5, 2, 3, 1, 2, 1, 3, 5, 2, 2, 1, 5, 2, 1, 3, 2, 1, 4, 3, 2, 5, 3, 3, 5, 2, 3, 5, 4, 3, 3, 5, 5, 5, 5, 4, 1, 3, 2, 4, 1, 1, 4, 3, 1, 5, 1, 2,
+        5, 5, 3, 5, 4, 3, 1, 1, 2, 2, 3, 2, 4, 4, 4, 5, 3, 1, 3, 4, 3, 4, 4, 5, 1, 5, 5, 1, 2, 3, 5, 5, 3, 5, 4, 5, 3, 3, 1, 1, 3, 2, 4, 3, 1, 3, 1, 5, 5, 2,
+        5, 3, 3, 4, 3, 2, 2, 5, 4, 5, 4, 4, 3, 1, 2, 3, 5, 5, 3, 5, 1, 1, 4, 1, 1, 2, 3, 3, 5, 3, 5, 5, 1, 5, 2, 3, 1, 5, 1, 5, 5, 5, 1, 4, 5, 5, 2, 5, 1, 4,
+        4, 5, 2, 2, 3, 1, 1, 4, 1, 2, 5, 3, 3, 2, 4, 2, 3, 4, 5, 2, 5, 3, 4, 5, 3, 5, 5, 1, 4, 4, 1, 2, 5, 3, 1, 3, 2, 2, 5, 3, 1, 5, 3, 1, 5, 4, 1, 2, 3, 4,
+        1, 5, 2, 5, 5, 4, 4, 4, 3, 2, 2, 4, 1, 1, 1, 5, 4, 2, 2, 5, 5, 4, 1, 5, 1, 5, 1, 4, 4, 1, 4, 2, 4, 3, 5, 5, 2, 4, 3, 2, 5, 1, 1, 4, 1, 3, 5, 5, 3, 4,
+        5, 3, 4, 5, 4, 4, 3, 1, 5, 5, 4, 4, 3, 4, 5, 2, 4, 5, 5, 2, 2, 3, 1, 3, 1, 3, 1, 5, 3, 1, 1, 4, 5, 5, 4, 4, 3, 5, 1, 2, 1, 1, 4, 2, 3, 2, 1, 1, 3, 3,
+        5, 5, 1, 5, 3, 1, 3, 1, 2, 3, 5, 5, 2, 5, 5, 3, 4, 2, 5, 5, 1, 5, 3, 1, 5, 2, 4, 5, 2, 3, 1, 2, 1, 3, 4, 2, 2, 3, 3, 3, 4, 5, 4, 2, 4, 4, 3, 2, 4, 3,
+        4, 3, 1, 3, 3, 5, 5, 5, 2, 3, 3, 5, 2, 2, 2, 3, 4, 2, 4, 2, 4, 1, 2, 4, 5, 5, 1, 2, 5, 2, 5, 3, 2, 5, 4, 1, 5, 1, 2, 1, 1, 1, 5, 3, 5, 1, 3, 2, 2, 2,
+        2, 1, 5, 2, 5, 5, 3, 1, 2, 5, 3, 3, 5, 2, 4, 1, 2, 3, 3, 3, 2, 5, 5, 5, 2, 1, 4, 3, 4, 1, 4, 3, 4, 5, 5, 4, 3, 2, 5, 5, 2, 5, 3, 5, 3, 4, 3, 3, 1, 2,
+        1, 1, 5, 5, 5, 3, 2, 2, 3, 5, 5, 4, 5, 4, 5, 4, 2, 3, 2, 2, 5, 2, 1, 4, 4, 1, 3, 3, 4, 3, 5, 4, 1, 5, 4, 3, 4, 3, 1, 2, 1, 4, 2, 2, 1, 4, 1, 4, 4, 2,
+        3, 1, 1, 4, 1, 1, 1, 4, 1, 4, 4, 1, 4, 5, 4, 5, 4, 5, 1, 3, 1, 5, 4, 1, 5, 1, 4, 3, 3, 4, 4, 1, 4, 3, 5, 2, 4, 3, 4, 4, 5, 4, 1, 1, 2, 2, 2, 5, 5, 1,
+        2, 1, 1, 5, 2, 1, 1, 4, 1, 2, 1, 4, 2, 5, 4, 4, 1, 2, 5, 4, 3, 1, 1, 3, 2, 1, 3, 2, 5, 4, 2, 2, 5, 1, 2, 2, 3, 2, 2, 3, 3, 5, 1, 3, 4, 5, 2, 3, 1, 1,
+    };
+    matrix C = {20,50,1,1};
+    C.allocation.memory = (u8 *)_C;
+    C.allocation.size = sizeof(_C);
+
+    float64 final_cost = matrix_factorization(&params, C, features, epochs, (b32x)non_negative);
+    
+    return PyFloat_FromDouble(final_cost);
+}
+
+static PyObject *
+spam_mlp_classifier(PyObject *self, PyObject *args, PyObject *keywds)
+{
+    Neural_Network_Hyperparams params = default_hyperparams();
+	
+    PyObject *layer_sizes_tuple;
+	
+	int epochs = 30;
+    int minibatch_size = 10;
+	
+    optstruct fpopts = precision_full();
+  
+    char *subnormal_enum = "CPFLOAT_SUBN_USE";
+	char *round_enum = "CPFLOAT_RND_TP";
+	char *flip_enum = "CPFLOAT_NO_SOFTERR";
+	char *explim_enum = "CPFLOAT_EXPRANGE_TARG";
+	
+	static char *kwlist[] = {
+		"layer_sizes",
+		"epochs",
+		"minibatch_size",
+		"learning_rate",
+		"weight_decay",
+		"dropout",
+		"momentum_coefficient",
+		"fp_precision",
+		"fp_emax",
+		"fp_subnormal",
+		"fp_round",
+		"fp_flip",
+		"fp_p",
+		"fp_explim",
+		NULL};
+		
+	if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|iiddddiisssfs:mlp_classifier", kwlist, 
+		&layer_sizes_tuple,
+		&epochs, 
+		&minibatch_size,
+		&params.learning_rate,
+		&params.weight_decay,
+		&params.dropout,
+		&params.momentum_coefficient,
+		&fpopts.precision,
+		&fpopts.emax,
+		&subnormal_enum,
+		&round_enum,
+		&flip_enum,
+		&fpopts.p,
+		&explim_enum)) 
+	{
+		return NULL;
+	}
+
+	if(!set_fpopts_by_names(&fpopts, subnormal_enum, round_enum, flip_enum, explim_enum)) return NULL;
+	PySys_WriteStdout("cpfloat_validate_optstruct returned %d\n", cpfloat_validate_optstruct(&fpopts));
+	
+    params.forward_fpopts = fpopts;
+    params.backprop_fpopts = fpopts;
+    params.update_fpopts = fpopts;
+	
+	if(layer_sizes_tuple == NULL)
+	{
+		PyErr_SetString(SpamError, "Layer sizes not provided");
 		return NULL;
 	}
 	
-    #if false
-    // Initialize a 2x2 matrix with four arbitrary elements
-    double X[4] = { (double)1/3, M_PI, M_E, M_SQRT2 };
-    double Y[4];
-    PySys_WriteStdout("Values in binary64:\n %.15e %.15e\n %.15e %.15e \n",
-           X[0], X[1], X[2], X[3]);
-  
-    // Round the values of X to the binary16 format and store in Y
-    cpfloat(&Y[0], &X[0], 4, fpopts);
-    PySys_WriteStdout("Rounded to binary16:\n %.15e %.15e\n %.15e %.15e \n",
-           Y[0], Y[1], Y[2], Y[3]);
-  
-    // Set the precision of the significand to 8 bits,
-    // and the maximum exponent to 127, which gives the bfloat16 format
-    fpopts ->precision = 8;
-    fpopts ->emax = 127;
-  
-    // Round the values of X to the bfloat16 and store in Y
-    cpfloat(&Y[0], &X[0], 4, fpopts);
-    PySys_WriteStdout("Rounded to bfloat16:\n %.15e %.15e\n %.15e %.15e \n",
-                       Y[0], Y[1], Y[2], Y[3]);
-  
-    cpfloat(&X[0], &X[0], 4, fpopts);
-    PySys_WriteStdout("Rounded to bfloat16:\n %.15e %.15e\n %.15e %.15e \n",
-                       X[0], X[1], X[2], X[3]);
+    Py_ssize_t layer_count_Py_ssize_t = PyTuple_Size(layer_sizes_tuple);
+    int layer_count = safecast_to_int(layer_count_Py_ssize_t);
+    int *layer_sizes = (int *)malloc(layer_count*sizeof(int));
+    for(int i=0; i<layer_count; ++i)
+    {
+        layer_sizes[i] = (int)PyLong_AsLong(PyTuple_GetItem(layer_sizes_tuple, i));
+    }
 	
-	#endif				   
-	
-	
-    // Validate the parameters in fpopts.
-    int retval = cpfloat_validate_optstruct(fpopts);
-    PySys_WriteStdout("cpfloat_validate_optstruct returned %d\n", retval);
-    
-	
-    //PySys_WriteStdout("%d %d %f %f %f %f\n", epochs, minibatch_size, learning_rate, weight_decay, dropout, momentum_coefficient);
-	
-	int correctly_classified_after_training = 
-	    neural_net_test(fpopts, layer_count, layer_sizes, epochs, minibatch_size, learning_rate, weight_decay, dropout, momentum_coefficient);
-	
-	
-	free_optstruct(fpopts);
+    int correctly_classified_after_training = 
+        neural_net_test(&params, layer_count, layer_sizes, epochs, minibatch_size);
 	
     free(layer_sizes);
     
     return PyLong_FromLong(correctly_classified_after_training);
-	
-	//Py_INCREF(Py_None);
-    //return Py_None;
 }
 
 static PyMethodDef SpamMethods[] = {

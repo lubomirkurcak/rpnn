@@ -278,6 +278,7 @@ typedef struct {
   cpfloat_randseed_t *randseed;
 } optstruct;
 
+#if false
 optstruct *init_optstruct() {
   optstruct *fpopts = (optstruct *)malloc(sizeof(*fpopts));
   fpopts->bitseed = NULL;
@@ -294,6 +295,7 @@ int free_optstruct(optstruct *fpopts) {
     return 0;
   }
 }
+#endif
 
 /*
  * CPFloat - Custom Precision Floating-point numbers.

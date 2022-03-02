@@ -182,23 +182,20 @@ internal void transpose_test()
 {
     double _A[] =
     {
-        1, 2, 3, 4,
-        5, 6, 7, 8,
-        9,10,11,12,
-       13,14,15,16,
+        1, 2, 3,
+        4, 5, 6,
     };
-    matrix A = {4,4,1,1};
+    matrix A = {2,3,1,1};
     A.allocation.memory = (u8 *)_A;
     A.allocation.size = sizeof(_A);
 
     double _B[] =
     {
-        1, 5, 9,13,
-        2, 6,10,14,
-        3, 7,11,15,
-        4, 8,12,16,
+        1, 4,
+        2, 5,
+        3, 6,
     };
-    matrix B = {4,4,1,1};
+    matrix B = {3,2,1,1};
     B.allocation.memory = (u8 *)_B;
     B.allocation.size = sizeof(_B);
 
@@ -221,15 +218,19 @@ internal void matrix_factorization_test()
     matrix C = {4,5,1,1};
     C.allocation.memory = (u8 *)_C;
     C.allocation.size = sizeof(_C);
+
+    Neural_Network_Hyperparams params = default_hyperparams();
+    params.learning_rate = 0.001f;
     
-    int features=2;
-    int epochs=5000;
-    float learning_rate=0.1f;
-    matrix_factorization(C, features, epochs, learning_rate);
+    int features = 2;
+    int epochs = 500;
+    b32x non_negative = true;
+    matrix_factorization(&params, C, features, epochs, non_negative);
 }
 
 internal void matrix_factorization_test2()
 {
+    // NOTE(lubo): Uniformly random integers from [1, 5]
     double _C[] =
     {
         5, 2, 5, 4, 1, 5, 5, 3, 1, 3, 2, 4, 5, 2, 3, 1, 4, 3, 5, 3, 1, 2, 5, 4, 3, 5, 5, 3, 3, 1, 2, 1, 4, 5, 5, 1, 2, 3, 1, 5, 1, 3, 2, 1, 2, 3, 3, 2, 2, 1,
@@ -256,11 +257,19 @@ internal void matrix_factorization_test2()
     matrix C = {20,50,1,1};
     C.allocation.memory = (u8 *)_C;
     C.allocation.size = sizeof(_C);
-    
-    int features=10;
-    int epochs=50000;
-    float learning_rate=0.01f;
-    matrix_factorization(C, features, epochs, learning_rate);
+
+    Neural_Network_Hyperparams params = default_hyperparams();
+    params.learning_rate = 0.001f;
+
+    // NOTE(lubo): Experimental results (50000 epochs, 0.001 learning_rate, squared error cost):
+    // 10 features - Final cost: 521.018701
+    // 15 features - Final cost: 179.855787
+    // 20 features - Final cost: 19.138323
+    // 25 features - Final cost: 0.031741
+    int features = 10;
+    int epochs = 50000;
+    b32x non_negative = true;
+    matrix_factorization(&params, C, features, epochs, non_negative);
 }
 
 internal void matrix_factorization_test3()
@@ -286,11 +295,14 @@ internal void matrix_factorization_test3()
     B.allocation.size = sizeof(_B);
 
     matrix C = A*B;
+
+    Neural_Network_Hyperparams params = default_hyperparams();
+    params.learning_rate = 0.0001f;
     
-    int features=2;
-    int epochs=500000;
-    float learning_rate=0.0001f;
-    matrix_factorization(C, features, epochs, learning_rate);
+    int features = 2;
+    int epochs = 50000;
+    b32x non_negative = true;
+    matrix_factorization(&params, C, features, epochs, non_negative);
 }
 
 //#include "geometric_algebra.h"
@@ -312,7 +324,7 @@ internal void unit_tests_run()
 
     //simple_fuzzy_strategy_management();
     
-    // matrix_test();
+    //matrix_test();
 
     //zkgra_codes();
     
@@ -329,5 +341,5 @@ internal void unit_tests_run()
 
     //matrix_factorization_test();
     //matrix_factorization_test2();
-    matrix_factorization_test3();
+    //matrix_factorization_test3();
 }

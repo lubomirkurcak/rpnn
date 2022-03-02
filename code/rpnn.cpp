@@ -15,14 +15,10 @@ global buffer global_debug_mnist_test_bitmap_buffer;
 global Loaded_Bitmap global_debug_mnist_test_bitmap;
 
 internal int neural_net_test(
-    optstruct *fpopts,
+    Neural_Network_Hyperparams *params,
     int layer_count, int *layer_sizes,
     int epochs = 30,
-    int minibatch_size = 10,
-    float learning_rate = 0.1f,
-    float weight_decay = 0,
-    float dropout = 0,
-    float momentum_coefficient = 0)
+    int minibatch_size = 10)
 {
     buffer train_set_file = read_entire_file(String("data\\mnist\\train-images.idx3-ubyte"));
     buffer train_labels_file = read_entire_file(String("data\\mnist\\train-labels.idx1-ubyte"));
@@ -63,49 +59,8 @@ internal int neural_net_test(
             }
         }
     }
-
-    #if false
-    // NOTE(lubo): These settings get about 94.5% on MNIST
-    //int layer_sizes[] = {train_set.element_size, 30, 10};
-    int epochs = 30;
-    int minibatch_size = 10;
-    float learning_rate = 0.1f;    
-    float weight_decay = 5.0f/train_set.elements;
-    float dropout = 0;
-    float momentum_coefficient = 0;
-
-    epochs = 1;
-    #endif
     
-    
-    // learning_rate = 0.01f;
-    // epochs = 60;
-    // momentum_coefficient = 0.05f;
-    
-    #if false
-    // NOTE(lubo): Precision reduce options
-    optstruct *fpopts = init_optstruct();
-  
-    // Set up the parameters for binary16 target format.
-    fpopts->precision = 11;                 // Bits in the significand + 1.
-    fpopts->emax = 15;                      // The maximum exponent value.
-    fpopts->subnormal = CPFLOAT_SUBN_USE;   // Support for subnormals is on.
-    fpopts ->round = CPFLOAT_RND_TP;        // Round toward +infinity.
-    fpopts->flip = CPFLOAT_NO_SOFTERR;      // Bit flips are off.
-    fpopts->p = 0;                          // Bit flip probability (not used).
-    fpopts->explim = CPFLOAT_EXPRANGE_TARG; // Limited exponent in target format.
-  
-    // Validate the parameters in fpopts.
-    int retval = cpfloat_validate_optstruct(fpopts);
-    PySys_WriteStdout("The validation function returned %d.\n", retval);
-    #endif
-
-    optstruct *forward_fpopts = fpopts;
-    optstruct *backprop_fpopts = fpopts;
-    optstruct *update_fpopts = fpopts;
-    
-    Neural_Network _net = neural_net_parametrized(layer_count, layer_sizes, learning_rate, weight_decay, dropout, /*idx.elements, */momentum_coefficient,
-                                                  forward_fpopts, backprop_fpopts, update_fpopts);
+    Neural_Network _net = create_feedforward_net(params, layer_count, layer_sizes);
     Neural_Network *net = &_net;
 
     //save(net);
@@ -131,31 +86,33 @@ int main(int argc, char *argv[])
     int layer_count = ArrayCount(layer_sizes);
     int epochs = 30;
     int minibatch_size = 10;
-    float learning_rate = 0.1f;    
-    float weight_decay = 0.0001f; //5.0f/train_set.elements;
-    float dropout = 0;
-    float momentum_coefficient = 0;
 
     // Allocate the data structure for target formats and rounding parameters.
-    optstruct *fpopts = init_optstruct();
+    optstruct fpopts = {};
   
     // Set up the parameters for binary16 target format.
-    fpopts->precision = 11;                 // Bits in the significand + 1.
-    fpopts->emax = 15;                      // The maximum exponent value.
-    fpopts->subnormal = CPFLOAT_SUBN_USE;   // Support for subnormals is on.
-    fpopts->round = CPFLOAT_RND_TP;        // Round toward +infinity.
-    fpopts->flip = CPFLOAT_NO_SOFTERR;      // Bit flips are off.
-    fpopts->p = 0;                          // Bit flip probability (not used).
-    fpopts->explim = CPFLOAT_EXPRANGE_TARG; // Limited exponent in target format.
+    fpopts.precision = 11;                 // Bits in the significand + 1.
+    fpopts.emax = 15;                      // The maximum exponent value.
+    fpopts.subnormal = CPFLOAT_SUBN_USE;   // Support for subnormals is on.
+    fpopts.round = CPFLOAT_RND_TP;        // Round toward +infinity.
+    fpopts.flip = CPFLOAT_NO_SOFTERR;      // Bit flips are off.
+    fpopts.p = 0;                          // Bit flip probability (not used).
+    fpopts.explim = CPFLOAT_EXPRANGE_TARG; // Limited exponent in target format.
 
     // Validate the parameters in fpopts.
-    int retval = cpfloat_validate_optstruct(fpopts);
+    int retval = cpfloat_validate_optstruct(&fpopts);
     printf("cpfloat_validate_optstruct returned %d\n", retval);
-  
+
+    Neural_Network_Hyperparams params = default_hyperparams();
+    params.forward_fpopts = fpopts;
+    params.backprop_fpopts = fpopts;
+    params.update_fpopts = fpopts;
+    params.learning_rate = 0.1f;    
+    params.weight_decay = 0.0001f; //5.0f/train_set.elements;
+    params.dropout = 0;
+    params.momentum_coefficient = 0;
 
     int correctly_classified_after_training = 
-        neural_net_test(fpopts, layer_count, layer_sizes, epochs, minibatch_size, learning_rate, weight_decay, dropout, momentum_coefficient);
+        neural_net_test(&params, layer_count, layer_sizes, epochs, minibatch_size);
     printf("correctly_classified_after_training %d\n", correctly_classified_after_training);
-
-    free_optstruct(fpopts);
 }

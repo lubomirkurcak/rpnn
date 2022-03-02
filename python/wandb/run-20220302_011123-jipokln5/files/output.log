@@ -1,0 +1,1 @@
+{'dropout': 0, 'epochs': 50000, 'features': 25, 'fp_emax': 19, 'fp_explim': 'CPFLOAT_EXPRANGE_TARG', 'fp_flip': 'CPFLOAT_NO_SOFTERR', 'fp_p': 0.28743744895572854, 'fp_precision': 9, 'fp_round': 'CPFLOAT_RND_SP', 'fp_subnormal': 'CPFLOAT_SUBN_RND', 'learning_rate': 0.001, 'loss': 'mean_squared_error', 'momentum_coefficient': 0, 'non_negative': 1, 'weight_decay': 0.0001}
