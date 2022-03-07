@@ -17,6 +17,8 @@
 #include "stb_sprintf.h"
 #define STB_PERLIN_IMPLEMENTATION
 #include "stb_perlin.h"
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
 
 inline b32x strings_equal(char *a, char *b)
 {
@@ -149,8 +151,12 @@ SAFECAST(int, u8);
         return result;                                  \
     };
 
+CLAMPCAST(double, u8);
 CLAMPCAST(float, u8);
 CLAMPCAST(int, u8);
+
+CLAMPCAST(double, s8);
+CLAMPCAST(float, s8);
 
 inline int simple_hash(string a)
 {
@@ -172,40 +178,6 @@ inline void clear_buffer(buffer A)
 {
     memset(A.memory, 0, A.size);
 }
-
-#if 0
-internal buffer read_entire_file_to_buffer(buffer write_to, string filename)
-{
-    buffer result = {};
-    
-    char *tmp = (char *)malloc(filename.size + 1);
-    block_copy(tmp, filename.memory, filename.size + 1);
-    tmp[filename.size] = 0;
-    FILE *f = fopen(tmp, "rb");
-    if(f)
-    {
-        fseek(f, 0, SEEK_END);
-        smm file_size = ftell(f);
-        fseek(f, 0, SEEK_SET);
-
-        Assert(write_to.size >= file_size);
-
-        fread(write_to.memory, 1, file_size, f);
-        fclose(f);
-
-        result.memory = write_to.memory;
-        result.size = file_size;
-
-        if(write_to.size >= file_size + 1)
-        {
-            buf.memory[buf.size] = 0;
-        }
-    }
-    free(tmp);
-
-    return result;
-}
-#endif
 
 internal buffer read_entire_file(Memory_Arena *arena, string filename)
 {

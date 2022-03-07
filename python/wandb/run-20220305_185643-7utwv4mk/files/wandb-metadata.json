@@ -1,0 +1,26 @@
+{
+    "os": "Windows-10-10.0.19041-SP0",
+    "python": "3.9.2",
+    "heartbeatAt": "2022-03-05T17:56:45.971692",
+    "startedAt": "2022-03-05T17:56:43.296368",
+    "docker": null,
+    "gpu": "GeForce GTX 960",
+    "gpu_count": 1,
+    "cpu_count": 4,
+    "cuda": null,
+    "args": [
+        "-f",
+        "C:\\Users\\Lubko\\AppData\\Roaming\\jupyter\\runtime\\kernel-408810b8-4683-46d4-a420-53cb55bfcf46.json"
+    ],
+    "state": "running",
+    "program": "matrix_factorization.ipynb",
+    "root": "W:/rpnn",
+    "git": {
+        "remote": "https://github.com/lubomirkurcak/rpnn.git",
+        "commit": "f407725f65d52e9bef8555c5de57c447d05178f6"
+    },
+    "email": "lubomirkurcak@gmail.com",
+    "host": "DESKTOP-03BNSVH",
+    "username": "Lubko",
+    "executable": "c:\\users\\lubko\\appdata\\local\\programs\\python\\python39\\python.exe"
+}

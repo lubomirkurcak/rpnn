@@ -1,0 +1,12 @@
+
+logging
+	measure activations/weights mean and variance through training
+
+NO ALLOC RUNTIME
+
+adam
+
+findings:
+	dropout is bad
+		slowed learning rate and worse convergence
+		convergence is a bigger problem than overfitting 

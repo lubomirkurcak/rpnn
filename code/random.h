@@ -40,7 +40,9 @@ inline s32 get_random_s32(Random_Series *series=&global_default_random_series)
 
 inline float get_random_float(Random_Series *series=&global_default_random_series)
 {
-    float result = get_random_u32(series) / 4294967296.0f;
+    //float result = get_random_u32(series) / 4294967296.0f;
+    float result = get_random_u32(series) / 4294967554.0f;
+    Assert(result >= 0 && result < 1);
     return result;
 }
 
@@ -195,6 +197,15 @@ inline int
 get_random_int_up_to(int max, Random_Series *series=&global_default_random_series)
 {
     int result = (int)(max * get_random_float(series));
+    Assert(result >= 0 && result < max);
+    return result;
+}
+
+inline int
+get_random_int_between(int min_inclusive, int max_exclusive, Random_Series *series=&global_default_random_series)
+{
+    int result = min_inclusive + get_random_int_up_to(max_exclusive-min_inclusive, series);
+    Assert(result >= min_inclusive && result < max_exclusive);
     return result;
 }
 
@@ -204,6 +215,7 @@ inline u32
 get_random_u32_up_to(u32 max, Random_Series *series=&global_default_random_series)
 {
     u32 result = (u32)(max * get_random_float(series));
+    Assert(result >= 0 && result < max);
     return result;
 }
 
@@ -211,6 +223,7 @@ inline s32
 get_random_s32_up_to(s32 max, Random_Series *series=&global_default_random_series)
 {
     s32 result = (s32)(max * get_random_float(series));
+    Assert(result >= 0 && result < max);
     return result;
 }
 
@@ -218,6 +231,7 @@ inline s32
 get_random_s32_from_range(s32 min, s32 max, Random_Series *series=&global_default_random_series)
 {
     s32 result = (s32)lerp((float)min, (float)max, get_random_float(series));
+    Assert(result >= min && result < max);
     return result;
 }
 

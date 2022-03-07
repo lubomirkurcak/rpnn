@@ -139,7 +139,6 @@ inline DL_TYPE *
 get_pointer_by_index(DL_NAME *L, int Index)
 {
     Assert(Index >= 0 && Index < L->count);
-    
     DL_TYPE *Result = L->values + Index;
     return Result;
 }
@@ -302,6 +301,28 @@ reverse(DL_NAME *L)
     {
         Swap(L->values[i], L->values[L->count-1 - i]);
     }
+}
+
+internal void
+shuffle(DL_NAME *L, Random_Series *series=&global_default_random_series)
+{
+    int n = L->count;
+    for(int i=0; i<n-1; ++i)
+    {
+        int j = get_random_int_between(i, n, series);
+        Swap(L->values[i], L->values[j]);
+    }
+}
+
+internal DL_TYPE *get_pointer_to_random(DL_NAME *L, Random_Series *series=&global_default_random_series)
+{
+    DL_TYPE *result = get_pointer_by_index(L, get_random_int_up_to(L->count, series));
+    return result;
+}
+
+internal void remove_random(DL_NAME *L, Random_Series *series=&global_default_random_series)
+{
+    remove_by_index(L, get_random_int_up_to(L->count, series));
 }
 
 #ifdef DL_EQUALITY

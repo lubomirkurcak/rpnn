@@ -2,4 +2,4 @@
 
 set python=C:\Users\Lubko\AppData\Local\Programs\Python\Python39\python.exe
 
-%python% spamsetup.py sdist
+%python% rpnnsetup.py sdist

@@ -1,0 +1,36 @@
+2022-03-05 17:35:48,510 INFO    MainThread:4840 [internal.py:wandb_internal():88] W&B internal server running at pid: 4840, started at: 2022-03-05 17:35:48.505666
+2022-03-05 17:35:48,512 INFO    WriterThread:4840 [datastore.py:open_for_write():77] open: W:\rpnn\python\wandb\run-20220305_173547-ey7ekn0u\run-ey7ekn0u.wandb
+2022-03-05 17:35:48,512 DEBUG   HandlerThread:4840 [handler.py:handle_request():101] handle_request: check_version
+2022-03-05 17:35:48,517 DEBUG   SenderThread:4840 [sender.py:send():122] send: header
+2022-03-05 17:35:48,517 DEBUG   SenderThread:4840 [sender.py:send():122] send: request
+2022-03-05 17:35:48,517 DEBUG   SenderThread:4840 [sender.py:send_request():131] send_request: check_version
+2022-03-05 17:35:48,632 DEBUG   SenderThread:4840 [sender.py:send():122] send: run
+2022-03-05 17:35:49,000 INFO    SenderThread:4840 [sender.py:_start_run_threads():596] run started: ey7ekn0u with start time 1646498147
+2022-03-05 17:35:49,000 DEBUG   SenderThread:4840 [sender.py:send():122] send: summary
+2022-03-05 17:35:49,000 INFO    SenderThread:4840 [sender.py:_save_file():730] saving file wandb-summary.json with policy end
+2022-03-05 17:35:49,001 DEBUG   HandlerThread:4840 [handler.py:handle_request():101] handle_request: run_start
+2022-03-05 17:35:49,009 DEBUG   HandlerThread:4840 [meta.py:__init__():34] meta init
+2022-03-05 17:35:49,010 DEBUG   HandlerThread:4840 [meta.py:__init__():48] meta init done
+2022-03-05 17:35:49,010 DEBUG   HandlerThread:4840 [meta.py:probe():190] probe
+2022-03-05 17:35:49,028 DEBUG   HandlerThread:4840 [meta.py:_setup_git():180] setup git
+2022-03-05 17:35:49,099 DEBUG   HandlerThread:4840 [meta.py:_setup_git():187] setup git done
+2022-03-05 17:35:49,099 DEBUG   HandlerThread:4840 [meta.py:_save_pip():52] save pip
+2022-03-05 17:35:49,099 DEBUG   HandlerThread:4840 [meta.py:_save_pip():66] save pip done
+2022-03-05 17:35:49,099 DEBUG   HandlerThread:4840 [meta.py:probe():231] probe done
+2022-03-05 17:35:49,207 DEBUG   SenderThread:4840 [sender.py:send():122] send: files
+2022-03-05 17:35:49,208 INFO    SenderThread:4840 [sender.py:_save_file():730] saving file wandb-metadata.json with policy now
+2022-03-05 17:35:49,208 DEBUG   HandlerThread:4840 [handler.py:handle_request():101] handle_request: status
+2022-03-05 17:35:49,209 DEBUG   SenderThread:4840 [sender.py:send():122] send: request
+2022-03-05 17:35:49,209 DEBUG   SenderThread:4840 [sender.py:send_request():131] send_request: status
+2022-03-05 17:35:52,830 DEBUG   SenderThread:4840 [sender.py:send():122] send: stats
+2022-03-05 17:35:57,818 DEBUG   SenderThread:4840 [sender.py:send():122] send: stats
+2022-03-05 17:36:02,856 DEBUG   SenderThread:4840 [sender.py:send():122] send: stats
+2022-03-05 17:36:07,897 DEBUG   SenderThread:4840 [sender.py:send():122] send: stats
+2022-03-05 17:36:12,849 DEBUG   SenderThread:4840 [sender.py:send():122] send: stats
+2022-03-05 17:36:17,842 DEBUG   SenderThread:4840 [sender.py:send():122] send: stats
+2022-03-05 17:36:21,781 WARNING MainThread:4840 [internal.py:is_dead():343] Internal process exiting, parent pid 2864 disappeared
+2022-03-05 17:36:21,781 ERROR   MainThread:4840 [internal.py:wandb_internal():142] Internal process shutdown.
+2022-03-05 17:36:21,870 INFO    SenderThread:4840 [sender.py:finish():833] shutting down sender
+2022-03-05 17:36:21,870 INFO    WriterThread:4840 [datastore.py:close():258] close: W:\rpnn\python\wandb\run-20220305_173547-ey7ekn0u\run-ey7ekn0u.wandb
+2022-03-05 17:36:21,870 INFO    HandlerThread:4840 [handler.py:finish():535] shutting down handler
+2022-03-05 17:36:23,611 INFO    MainThread:4840 [internal.py:handle_exit():78] Internal process exited

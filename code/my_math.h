@@ -151,15 +151,6 @@ inline float safe_ratio_1(float top, float bottom)
     return result;
 }
 
-inline s8 clamp_to_s8(float value)
-{
-    s8 result = 0;
-    if(value >= s8_max) result = s8_max;
-    else if(value <= s8_min) result = s8_min;
-    else result = (s8)floor_to_int(value);
-    return result;
-}
-
 inline float to_range_11(float x)
 {
     float result = 2*x - 1;
@@ -172,17 +163,48 @@ inline float to_range_01(float x)
     return result;
 }
 
-inline float lerp(float a, float b, float t)
-{
-    float result = (1-t)*a + t*b;
-    return result;
-}
+
+#define LERP(TYPE, TYPE_T)                      \
+    inline TYPE lerp(TYPE a, TYPE b, TYPE_T t)  \
+    {                                           \
+        TYPE result = (1-t)*a + t*b;            \
+        return result;                          \
+    }
+
+#define LERP_CLAMPED(TYPE, TYPE_T)                      \
+    inline TYPE lerp_clamped(TYPE a, TYPE b, TYPE_T t)  \
+    {                                                   \
+        TYPE result = lerp(a, b, Clamp(t, 0, 1));       \
+        return result;                                  \
+    }
+
+LERP(float, float);
+LERP(float64, float64);
+LERP_CLAMPED(float, float);
+LERP_CLAMPED(float64, float64);
+
+// inline float lerp(float a, float b, float t)
+// {
+//     float result = (1-t)*a + t*b;
+//     return result;
+// }
 
 inline float inv_lerp(float min, float max, float value)
 {
     float result = 0;
     float range = max-min;
     if(absolute_value(range) > 0.00001f)
+    {
+        result = (value-min)/range;
+    }
+    return result;
+}
+
+inline float64 inv_lerp(float64 min, float64 max, float64 value)
+{
+    float64 result = 0;
+    float64 range = max-min;
+    if(absolute_value(range) > 0.000000001)
     {
         result = (value-min)/range;
     }
@@ -308,7 +330,7 @@ inline float trapezoid_function(float a, float b, float x)
 
 inline float isosceles_trapezoid_function(float width, float x)
 {
-    var result = trapezoid_function(lerp(0.5,0,width), lerp(0.5,1,width), x);
+    var result = trapezoid_function(lerp(0.5f,0,width), lerp(0.5f,1,width), x);
     return result;
 }
 
@@ -340,6 +362,21 @@ inline float move_towards(float target, float position, float step)
             result = position + step;
         }
     }
+    return result;
+}
+
+inline double move_towards_zero(double x, double step)
+{
+    double result = 0;
+    if(x > step)
+    {
+        result = x - step;
+    }
+    else if(x < -step)
+    {
+        result = x + step;
+    }
+
     return result;
 }
 

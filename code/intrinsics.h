@@ -26,6 +26,12 @@ inline float absolute_value(float x)
     return result;
 }
 
+inline float64 absolute_value(float64 x)
+{
+    auto result = fabs(x);
+    return result;
+}
+
 inline float sign(float x)
 {
     float result = 0;

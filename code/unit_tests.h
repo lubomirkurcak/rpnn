@@ -305,10 +305,180 @@ internal void matrix_factorization_test3()
     matrix_factorization(&params, C, features, epochs, non_negative);
 }
 
+internal void matrix_save_image_test()
+{
+    matrix A = create_matrix(256,256);
+    randomize_values(A);
+    save_matrix_as_image_to_file(A, "matrix_save_image_test.png");
+}
+
+internal void lookup_table_test()
+{
+    // NOTE(lubo): All inputs will have 5 buckets
+    int buckets[] = {5, 5, 5, 5};
+    
+    // NOTE(lubo): All inputs range from [0, 1]
+    double _ranges[] =
+    {
+        0, 1,
+        0, 1,
+        0, 1,
+        0, 1,
+    };
+    matrix ranges = {4,2,1,1};
+    ranges.allocation.memory = (u8 *)_ranges;
+    ranges.allocation.size = sizeof(_ranges);
+
+    // NOTE(lubo): 2 outputs
+    int output_count = 2;
+    
+    Lookup_Table _table = create_lookup_table(buckets, ranges, output_count);
+    Lookup_Table *table = &_table;
+
+    double train_inputs[] = {0.1f, 0.4f, 0.2f, 0.6f};
+    double train_outputs[] = {-1.0f, 4.0f};
+
+    table->evaluate(train_inputs);
+    table->learn(train_outputs, 1);
+
+    matrix prediction = table->evaluate(train_inputs);
+
+    Assert(matrix_get(prediction, 0) == train_outputs[0]);
+    Assert(matrix_get(prediction, 1) == train_outputs[1]);
+
+    save_lookup_table(table, "unit_test_table.lt");
+
+    incinerate(table);
+    
+    Lookup_Table table2 = load_lookup_table("unit_test_table.lt");
+    table2.evaluate(train_inputs);
+    Assert(matrix_get(table2.prediction, 0) == train_outputs[0]);
+    Assert(matrix_get(table2.prediction, 1) == train_outputs[1]);
+
+    incinerate(&table2);
+}
+
+internal void matrix_save_test()
+{
+    double _A[] =
+    {
+        1, 2, 3,
+        4, 5, 6,
+    };
+    matrix A = {2,3,1,1};
+    A.allocation.memory = (u8 *)_A;
+    A.allocation.size = sizeof(_A);
+
+    {
+        FILE *f = fopen("unit_test_matrix.mx", "wb");
+        write_matrix_to_file(f, A);
+        fclose(f);
+    }
+
+    matrix B = {};
+    {
+        FILE *f = fopen("unit_test_matrix.mx", "rb");
+        B = read_matrix_from_file(f);
+        fclose(f);
+    }
+
+    Assert(matrices_are_equal(A, B));
+
+    incinerate(B);
+}
+
+internal void dropout_test()
+{
+    matrix A = create_matrix(100, 100);
+    for(double dropout_keep_p = 0.5; dropout_keep_p < 1; dropout_keep_p += 0.1)
+    {
+        dropout_matrix(A, dropout_keep_p);
+        auto average = matrix_average(A);
+        Assert(average > 0.9f);
+        Assert(average < 1.1f);
+    }
+    incinerate(A);
+}
+
+internal void copy_network_test()
+{
+    int layer_sizes[] = {4, 16, 16, 16, 2};
+    auto params = default_hyperparams();
+    Neural_Network net1 = create_feedforward_net(params, ArrayCount(layer_sizes), layer_sizes);
+    Neural_Network net2 = create_feedforward_net(params, ArrayCount(layer_sizes), layer_sizes);
+
+    double _A[] = {1, 0, 1, 0};
+    matrix A = {4,1,1,1};
+    A.allocation.memory = (u8 *)_A;
+    A.allocation.size = sizeof(_A);
+    
+    matrix result1 = net1.evaluate(A);
+    copy_neural_network(&net2, &net1);
+    matrix result2 = net2.evaluate(A);
+
+    Assert(matrices_are_equal(result1, result2));
+
+    double _B[] = {0, 1};
+    matrix B = {2,1,1,1};
+    B.allocation.memory = (u8 *)_B;
+    B.allocation.size = sizeof(_B);
+    
+    net1.learn(B, 1);
+    result1 = net1.evaluate(A);
+    result2 = net2.evaluate(A);
+
+    Assert(!matrices_are_equal(result1, result2));
+
+    copy_neural_network(&net2, &net1);
+    result2 = net2.evaluate(A);
+
+    Assert(matrices_are_equal(result1, result2));
+    
+    incinerate(&net1);
+    incinerate(&net2);
+}
+
+internal void random_exlusive_div_search()
+{
+    // NOTE(lubo): Smallest div, that gives values from [0, 1) for all u32
+    u64 div = 4294967296;
+    b32x problem = true;
+    while(problem)
+    {
+        problem = false;
+        for(u32 i=4294965119 - 10000; i!=0; ++i)
+        {
+            if((i / (float)div) == 1)
+            {
+                printf("%u/%llu == 1.0\n", i, div);
+                problem = true;
+                break;
+            }
+        }
+        div += 1;
+    }
+    // 4294967554
+    printf("WORKING DIV = %llu\n", div);
+}
+
 //#include "geometric_algebra.h"
+
+internal void big_unit_tests()
+{
+    dropout_test();
+
+    copy_network_test();
+    
+    //matrix_save_test();
+    //matrix_save_image_test();
+    
+    lookup_table_test();
+}
 
 internal void unit_tests_run()
 {
+    //big_unit_tests();
+    
     //Assert(false, "Assertion fail detection test. Success! :D");
     
     string_ringbuffer_test();
@@ -338,7 +508,7 @@ internal void unit_tests_run()
     // print_geometric_product_for_dimension(4);
 
     transpose_test();
-
+    
     //matrix_factorization_test();
     //matrix_factorization_test2();
     //matrix_factorization_test3();

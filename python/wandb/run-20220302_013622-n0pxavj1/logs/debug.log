@@ -1,0 +1,26 @@
+2022-03-02 01:36:22,719 INFO    Thread-172:18400 [wandb_setup.py:_flush():69] setting env: {'project': 'matrix-factorization', 'entity': 'lubomirkurcak', 'root_dir': 'W:\\rpnn\\python', 'sweep_id': 'jneupcgr', 'run_id': 'n0pxavj1', 'sweep_param_path': 'W:\\rpnn\\python\\wandb\\sweep-jneupcgr\\config-n0pxavj1.yaml'}
+2022-03-02 01:36:22,719 INFO    Thread-172:18400 [wandb_setup.py:_flush():69] setting login settings: {}
+2022-03-02 01:36:22,719 INFO    Thread-172:18400 [wandb_init.py:_log_setup():334] Logging user logs to W:\rpnn\python\wandb\run-20220302_013622-n0pxavj1\logs\debug.log
+2022-03-02 01:36:22,719 INFO    Thread-172:18400 [wandb_init.py:_log_setup():335] Logging internal logs to W:\rpnn\python\wandb\run-20220302_013622-n0pxavj1\logs\debug-internal.log
+2022-03-02 01:36:22,720 INFO    Thread-172:18400 [wandb_init.py:_jupyter_setup():285] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x0000020D30EE8790>
+2022-03-02 01:36:22,720 INFO    Thread-172:18400 [wandb_init.py:init():367] calling init triggers
+2022-03-02 01:36:22,720 INFO    Thread-172:18400 [wandb_init.py:init():372] wandb.init called with sweep_config: {'dropout': 0, 'epochs': 50000, 'features': 15, 'fp_emax': 5, 'fp_explim': 'CPFLOAT_EXPRANGE_TARG', 'fp_flip': 'CPFLOAT_NO_SOFTERR', 'fp_p': 0.32356171968774394, 'fp_precision': 5, 'fp_round': 'CPFLOAT_RND_SE', 'fp_subnormal': 'CPFLOAT_SUBN_RND', 'learning_rate': 0.001, 'loss': 'mean_squared_error', 'momentum_coefficient': 0, 'non_negative': 1, 'weight_decay': 0.0001}
+config: {}
+2022-03-02 01:36:22,720 INFO    Thread-172:18400 [wandb_init.py:init():416] starting backend
+2022-03-02 01:36:22,720 INFO    Thread-172:18400 [backend.py:_multiprocessing_setup():69] multiprocessing start_methods=spawn, using: spawn
+2022-03-02 01:36:22,722 INFO    Thread-172:18400 [backend.py:ensure_launched():123] starting backend process...
+2022-03-02 01:36:22,794 INFO    Thread-172:18400 [backend.py:ensure_launched():127] started backend process with pid: 21724
+2022-03-02 01:36:22,795 INFO    Thread-172:18400 [wandb_init.py:init():421] backend started and connected
+2022-03-02 01:36:22,804 INFO    Thread-172:18400 [wandb_run.py:_config_callback():733] config_cb None None {'dropout': 0, 'epochs': 50000, 'features': 15, 'fp_emax': 5, 'fp_explim': 'CPFLOAT_EXPRANGE_TARG', 'fp_flip': 'CPFLOAT_NO_SOFTERR', 'fp_p': 0.32356171968774394, 'fp_precision': 5, 'fp_round': 'CPFLOAT_RND_SE', 'fp_subnormal': 'CPFLOAT_SUBN_RND', 'learning_rate': 0.001, 'loss': 'mean_squared_error', 'momentum_coefficient': 0, 'non_negative': 1, 'weight_decay': 0.0001}
+2022-03-02 01:36:22,804 INFO    Thread-172:18400 [wandb_init.py:init():461] updated telemetry
+2022-03-02 01:36:22,805 INFO    Thread-172:18400 [wandb_init.py:init():480] communicating current version
+2022-03-02 01:36:23,807 INFO    Thread-172:18400 [wandb_init.py:init():485] got version response upgrade_message: "wandb version 0.12.11 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2022-03-02 01:36:23,808 INFO    Thread-172:18400 [wandb_init.py:init():493] communicating run to backend with 30 second timeout
+2022-03-02 01:36:24,152 INFO    Thread-172:18400 [wandb_init.py:init():518] starting run threads in backend
+2022-03-02 01:36:24,316 INFO    Thread-172:18400 [wandb_run.py:_console_start():1476] atexit reg
+2022-03-02 01:36:24,316 INFO    Thread-172:18400 [wandb_run.py:_redirect():1339] redirect: SettingsConsole.WRAP
+2022-03-02 01:36:24,316 INFO    Thread-172:18400 [wandb_run.py:_redirect():1374] Wrapping output streams.
+2022-03-02 01:36:24,316 INFO    Thread-172:18400 [wandb_run.py:_redirect():1390] Redirects installed.
+2022-03-02 01:36:24,316 INFO    Thread-172:18400 [wandb_init.py:init():542] run started, returning control to user process
+2022-03-02 01:36:41,096 INFO    Thread-172:18400 [wandb_run.py:finish():1135] finishing run lubomirkurcak/matrix-factorization/n0pxavj1

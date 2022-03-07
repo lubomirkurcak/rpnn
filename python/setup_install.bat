@@ -2,6 +2,6 @@
 
 set python=C:\Users\Lubko\AppData\Local\Programs\Python\Python39\python.exe
 
-%python% spamsetup.py install --user
+%python% rpnnsetup.py install --user
 
 timeout 5

@@ -13,6 +13,6 @@ popd
 pushd ..\python
 del /Q /S /F build\*
 :: NOTE: %python% needs to be set as an environmental variable path to python interpreter
-%python% spamsetup.py build
-::%python% spamsetup.py install
+%python% rpnnsetup.py build
+::%python% rpnnsetup.py install
 popd
