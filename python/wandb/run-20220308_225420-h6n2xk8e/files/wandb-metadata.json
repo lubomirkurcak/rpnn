@@ -1,0 +1,26 @@
+{
+    "os": "Windows-10-10.0.19041-SP0",
+    "python": "3.9.2",
+    "heartbeatAt": "2022-03-08T21:54:22.021548",
+    "startedAt": "2022-03-08T21:54:20.142493",
+    "docker": null,
+    "gpu": "GeForce GTX 960",
+    "gpu_count": 1,
+    "cpu_count": 4,
+    "cuda": null,
+    "args": [
+        "-f",
+        "C:\\Users\\Lubko\\AppData\\Roaming\\jupyter\\runtime\\kernel-47587fc6-ebae-4a73-9199-8c419b7737d3.json"
+    ],
+    "state": "running",
+    "program": "reinforcement_learning_wandb.ipynb",
+    "root": "W:/rpnn",
+    "git": {
+        "remote": "https://github.com/lubomirkurcak/rpnn.git",
+        "commit": "d21f324adb1e184229070d5c021a4b41564487c3"
+    },
+    "email": "lubomirkurcak@gmail.com",
+    "host": "DESKTOP-03BNSVH",
+    "username": "Lubko",
+    "executable": "c:\\users\\lubko\\appdata\\local\\programs\\python\\python39\\python.exe"
+}

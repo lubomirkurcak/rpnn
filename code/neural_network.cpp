@@ -532,7 +532,10 @@ internal matrix read_matrix_from_file(FILE *file)
 internal void write_matrix_list_to_file(FILE *file, list(matrix) *L)
 {
     fwrite(&L->count, 1, sizeof(L->count), file);
-    fwrite(L->allocation.memory, 1, L->allocation.size, file);
+    foreach_by_value(matrix A, L)
+    {
+        write_matrix_to_file(file, A);
+    }
 }
 
 internal void read_matrix_list_from_file(FILE *file, list(matrix) *L)
@@ -540,13 +543,19 @@ internal void read_matrix_list_from_file(FILE *file, list(matrix) *L)
     int count;
     fread(&count, 1, sizeof(count), file);
 
-    // TODO(lubo): This doesnt clear matrix allocs!!!!!!
+    foreach_by_value(matrix A, L)
+    {
+        incinerate(A);
+    }
+    
     clear_list(L);
-    
     int first_index = alloc_on_list(L, count);
-    matrix *write_to = get_pointer_by_index(L, first_index);
-    
-    fread(write_to, 1, count*sizeof(matrix), file);
+
+    for(int index=0; index<count; ++index)
+    {
+        matrix *write_to = get_pointer_by_index(L, first_index + index);
+        *write_to = read_matrix_from_file(file);
+    }
 }
 
 #define VERSION_NAME "RPNNv0.0"
@@ -577,33 +586,40 @@ internal void save_network(Neural_Network *net, char *filename)
     fclose(file);
 }
 
-internal void load_network(Neural_Network *net, char *filename)
+internal b32x load_network(Neural_Network *net, char *filename)
 {
     FILE *file = fopen(filename, "rb");
 
-    char save_version[sizeof(VERSION_NAME)-1];
-    fread(save_version, 1, sizeof(save_version), file);
-    Assert(memcmp(save_version, VERSION_NAME, sizeof(save_version)) == 0);
+    b32x success = false;
+    if(file)
+    {
+        success = true;
+        char save_version[sizeof(VERSION_NAME)-1];
+        fread(save_version, 1, sizeof(save_version), file);
+        Assert(memcmp(save_version, VERSION_NAME, sizeof(save_version)) == 0);
 
-    fread(&net->params, 1, sizeof(net->params), file);
+        fread(&net->params, 1, sizeof(net->params), file);
 
-    fread(&net->last_layer_softmax, 1, sizeof(net->last_layer_softmax), file);
+        fread(&net->last_layer_softmax, 1, sizeof(net->last_layer_softmax), file);
 
-    net->expected_output = read_matrix_from_file(file);
+        net->expected_output = read_matrix_from_file(file);
 
-    read_matrix_list_from_file(file, &net->activations);
-    read_matrix_list_from_file(file, &net->zs);
-    read_matrix_list_from_file(file, &net->dropouts);
-    read_matrix_list_from_file(file, &net->weights);
-    read_matrix_list_from_file(file, &net->biases);
-    read_matrix_list_from_file(file, &net->del_weights);
-    read_matrix_list_from_file(file, &net->del_biases);
-    read_matrix_list_from_file(file, &net->avg_del_weights);
-    read_matrix_list_from_file(file, &net->avg_del_biases);
-    read_matrix_list_from_file(file, &net->vel_weights);
-    read_matrix_list_from_file(file, &net->vel_biases);
-    
-    fclose(file);
+        read_matrix_list_from_file(file, &net->activations);
+        read_matrix_list_from_file(file, &net->zs);
+        read_matrix_list_from_file(file, &net->dropouts);
+        read_matrix_list_from_file(file, &net->weights);
+        read_matrix_list_from_file(file, &net->biases);
+        read_matrix_list_from_file(file, &net->del_weights);
+        read_matrix_list_from_file(file, &net->del_biases);
+        read_matrix_list_from_file(file, &net->avg_del_weights);
+        read_matrix_list_from_file(file, &net->avg_del_biases);
+        read_matrix_list_from_file(file, &net->vel_weights);
+        read_matrix_list_from_file(file, &net->vel_biases);
+        
+        fclose(file);
+    }
+
+    return success;
 }
 
 internal int save_matrix_as_image_to_file(matrix A, char const *filename)
@@ -748,11 +764,11 @@ internal float64 matrix_factorization(Neural_Network_Hyperparams *params, matrix
     return final_cost;
 }
 
-matrix Neural_Network::evaluate_input()
+void Neural_Network::evaluate_input()
 {
     feedforward(this);
-    matrix output = get_by_index(&this->activations, this->layer_count-1);
-    return output;
+    //matrix output = get_by_index(&this->activations, this->layer_count-1);
+    //return output;
 }
 
 void Neural_Network::learn_from_expected_output(int minibatch_size)

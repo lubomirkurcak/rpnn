@@ -181,6 +181,145 @@ static bool set_fpopts_by_names(optstruct *fpopts,
 	return true;
 }
 
+static optstruct GLOBAL_fpopts;
+
+static PyObject *
+rpnn_set_precision(PyObject *self, PyObject *args, PyObject *keywds)
+{
+    GLOBAL_fpopts = {};
+  
+    char *subnormal_enum = "CPFLOAT_SUBN_USE";
+	char *round_enum = "CPFLOAT_RND_SP";
+	char *flip_enum = "CPFLOAT_NO_SOFTERR";
+	char *explim_enum = "CPFLOAT_EXPRANGE_TARG";
+	
+	static char *kwlist[] = {
+		"fp_precision",
+		"fp_emax",
+		"fp_subnormal",
+		"fp_round",
+		"fp_flip",
+		"fp_p",
+		"fp_explim",
+		NULL};
+		
+	if (!PyArg_ParseTupleAndKeywords(args, keywds, "|iisssfs:set_precision", kwlist, 
+		&GLOBAL_fpopts.precision,
+		&GLOBAL_fpopts.emax,
+		&subnormal_enum,
+		&round_enum,
+		&flip_enum,
+		&GLOBAL_fpopts.p,
+		&explim_enum)) 
+	{
+		return NULL;
+	}
+
+	if(!set_fpopts_by_names(&GLOBAL_fpopts, subnormal_enum, round_enum, flip_enum, explim_enum)) return NULL;
+    if(cpfloat_validate_optstruct(&GLOBAL_fpopts) != 0) return NULL;
+	
+    Py_RETURN_NONE;
+}
+
+static Neural_Network_Hyperparams GLOBAL_nn_params = default_hyperparams();
+static int GLOBAL_nn_layer_count;
+static int *GLOBAL_nn_layer_sizes;
+
+static PyObject *
+rpnn_set_neuralnet_params(PyObject *self, PyObject *args, PyObject *keywds)
+{
+    GLOBAL_nn_params = default_hyperparams();
+	
+	PyObject *layer_sizes_tuple;
+	int features = 10;
+	int epochs = 30;
+	int non_negative = true;
+	int minibatch_size = 32;
+	
+	static char *kwlist[] = {
+		"layer_sizes",
+		"features",
+		"epochs",
+		"non_negative",
+		"minibatch_size",
+		"learning_rate",
+		"weight_decay",
+		"dropout_keep_p",
+		"momentum_coefficient",
+		NULL};
+		
+	if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|iipidddd:set_neuralnet_params", kwlist, 
+		&layer_sizes_tuple,
+		&features,
+		&epochs, 
+		&non_negative,
+		&minibatch_size,
+		&GLOBAL_nn_params.learning_rate,
+		&GLOBAL_nn_params.weight_decay,
+		&GLOBAL_nn_params.dropout_keep_p,
+		&GLOBAL_nn_params.momentum_coefficient)) 
+	{
+		return NULL;
+	}
+	
+	
+	if(layer_sizes_tuple == NULL)
+	{
+		PyErr_SetString(RPNNError, "Layer sizes not provided");
+		return NULL;
+	}
+	
+    Py_ssize_t layer_count_Py_ssize_t = PyTuple_Size(layer_sizes_tuple);
+    int layer_count = safecast_to_int(layer_count_Py_ssize_t);
+    int *layer_sizes = (int *)malloc(layer_count*sizeof(int));
+    for(int i=0; i<layer_count; ++i)
+    {
+        layer_sizes[i] = (int)PyLong_AsLong(PyTuple_GetItem(layer_sizes_tuple, i));
+    }
+	
+	GLOBAL_nn_layer_count = layer_count;
+	if(GLOBAL_nn_layer_sizes) free(GLOBAL_nn_layer_sizes);
+	GLOBAL_nn_layer_sizes = layer_sizes;
+	
+    Py_RETURN_NONE;
+}
+
+static Reinforcement_Parameters GLOBAL_rl_params = default_reinforcement_params();
+
+static PyObject *
+rpnn_set_reinforcement_params(PyObject *self, PyObject *args, PyObject *keywds)
+{
+	GLOBAL_rl_params = default_reinforcement_params();
+	
+	static char *kwlist[] = {
+		"epsilon0",
+		"epsilon1",
+		"exploration_steps",
+		"epsilon",
+		"gamma",
+		"alpha",
+		"target_update_frequency",
+		"replay_start_size",
+		"action_repeat",
+		NULL};
+		
+	if (!PyArg_ParseTupleAndKeywords(args, keywds, "|ffifffiii:set_reinforcement_params", kwlist, 
+		&GLOBAL_rl_params.epsilon0,
+		&GLOBAL_rl_params.epsilon1, 
+		&GLOBAL_rl_params.exploration_steps,
+		&GLOBAL_rl_params.epsilon,
+		&GLOBAL_rl_params.gamma,
+		&GLOBAL_rl_params.alpha,
+		&GLOBAL_rl_params.target_update_frequency,
+		&GLOBAL_rl_params.replay_start_size,
+		&GLOBAL_rl_params.action_repeat)) 
+	{
+		return NULL;
+	}
+	
+    Py_RETURN_NONE;
+}
+
 static PyObject *
 rpnn_matrix_factorization(PyObject *self, PyObject *args, PyObject *keywds)
 {
@@ -359,12 +498,21 @@ static bool DQN_CREATED;
 static Deep_Q_Network dqn;
 
 static PyObject *
+rpnn_cartpole_init(PyObject *self, PyObject *args, PyObject *keywds)
+{
+	gym_cartpole_create(&dqn, &GLOBAL_rl_params, &GLOBAL_nn_params, GLOBAL_nn_layer_count, GLOBAL_nn_layer_sizes);
+	DQN_CREATED = true;
+	
+    Py_RETURN_NONE;
+}
+
+static PyObject *
 rpnn_cartpole(PyObject *self, PyObject *args, PyObject *keywds)
 {
 	if(!DQN_CREATED)
 	{
-		DQN_CREATED = true;
-		gym_cartpole_create(&dqn);
+		PyErr_SetString(RPNNError, "Need to call 'cartpole_init' first.");
+		return NULL;
 	}
 	
     PyObject *observation_tuple;
@@ -432,8 +580,12 @@ static PyMethodDef RPNNMethods[] = {
     //{"create_forward_net",  create_forward_net, METH_VARARGS, "create_forward_net"},
     {"mlp_classifier",  (PyCFunction)rpnn_mlp_classifier, METH_VARARGS | METH_KEYWORDS, "mlp_classifier"},
     {"matrix_factorization",  (PyCFunction)rpnn_matrix_factorization, METH_VARARGS | METH_KEYWORDS, "matrix_factorization"},
+	{"cartpole_init",  (PyCFunction)rpnn_cartpole_init, METH_VARARGS | METH_KEYWORDS, "cartpole_init"},
 	{"cartpole",  (PyCFunction)rpnn_cartpole, METH_VARARGS | METH_KEYWORDS, "cartpole"},
 	//{"function_approximation",  (PyCFunction)rpnn_function_approximation, METH_VARARGS | METH_KEYWORDS, "function_approximation"},
+	{"set_precision",  (PyCFunction)rpnn_set_precision, METH_VARARGS | METH_KEYWORDS, "set_precision"},
+	{"set_reinforcement_params",  (PyCFunction)rpnn_set_reinforcement_params, METH_VARARGS | METH_KEYWORDS, "set_reinforcement_params"},
+	{"set_neuralnet_params",  (PyCFunction)rpnn_set_neuralnet_params, METH_VARARGS | METH_KEYWORDS, "set_neuralnet_params"},
 
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };

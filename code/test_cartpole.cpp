@@ -66,7 +66,7 @@ struct Deep_Q_Network
     Neural_Network active_Q;
     Neural_Network target_Q;
     
-    Lookup_Table Q_table;
+    //Lookup_Table Q_table;
 
     int retarget_count;
     int frame_counter;
@@ -78,24 +78,41 @@ struct Deep_Q_Network
     list(Cartpole_Experience) experiences;
 };
 
-internal void gym_cartpole_create(Deep_Q_Network *dqn)
+internal void gym_cartpole_create(
+    Deep_Q_Network *dqn,
+    Reinforcement_Parameters *rl_params,
+    Neural_Network_Hyperparams *nn_params,
+    int nn_layer_count,
+    int *nn_layer_sizes)
 {
-    dqn->params = default_reinforcement_params();
+    dqn->params = *rl_params;
     
-    int layer_sizes[] = {4, 16, 16, 16, 2};
-    auto params = default_hyperparams();
-    params.learning_rate = 0.1f;
-    params.weight_decay = 0.00001f;
-    dqn->active_Q = create_feedforward_net(params, ArrayCount(layer_sizes), layer_sizes);
-    dqn->target_Q = create_feedforward_net(params, ArrayCount(layer_sizes), layer_sizes);
+    auto params = *nn_params;
+    dqn->active_Q = create_feedforward_net(params, nn_layer_count, nn_layer_sizes);
+    dqn->target_Q = create_feedforward_net(params, nn_layer_count, nn_layer_sizes);
+
+    #if 0
+    if(load_network(&dqn->active_Q, "cartpole.nn"))
+    {
+        loginfo("cartpole", "Loaded neural network from file");
+    }
+    else
+    {
+        loginfo("cartpole", "Could not find neural network file");
+    }
+    #endif
 
     copy_neural_network(&dqn->target_Q, &dqn->active_Q);
-    
-    system("del   /q /s cartpole_networks");
-    system("rmdir /q /s cartpole_networks");
-    system("del   /q /s network_images");
-    system("rmdir /q /s network_images");
-    
+
+    if(false)
+    {
+        system("del   /q /s cartpole_networks");
+        system("rmdir /q /s cartpole_networks");
+        system("del   /q /s network_images");
+        system("rmdir /q /s network_images");
+    }
+
+    #if 0
     dqn->Q_table = load_lookup_table("cartpole.lt");
     if(!dqn->Q_table.buckets)
     {
@@ -124,6 +141,7 @@ internal void gym_cartpole_create(Deep_Q_Network *dqn)
     }
     dqn->Q_table.lerp_value = 0;//.9;
     Assert(dqn->Q_table.buckets);
+    #endif
 }
 
 // NOTE(lubo): Fixed-target SARSA step
@@ -214,7 +232,7 @@ internal int gym_cartpole_update(Deep_Q_Network *dqn, double *observation, doubl
         block_copy(experience.new_state, observation, sizeof(double)*4);
         append_to_list(&dqn->experiences, experience);
         
-        gym_cartpole_nonfixed_learn_from_experience(&dqn->params, &dqn->Q_table, &experience);
+        //gym_cartpole_nonfixed_learn_from_experience(&dqn->params, &dqn->Q_table, &experience);
 
         if(start_phase)
         {
@@ -235,16 +253,17 @@ internal int gym_cartpole_update(Deep_Q_Network *dqn, double *observation, doubl
                 dqn->retarget_count += 1;
                 loginfo("reinforce", "Retarget %d (epsilon = %f) (%d xp)", dqn->retarget_count, dqn->params.epsilon, dqn->experiences.count);
 
+                if(false)
+                {
+                    system("mkdir cartpole_networks");
+                    char save_name[256];
+                    sprintf(save_name, "cartpole_networks\\%d.nn", dqn->retarget_count);
+                    save_network(&dqn->active_Q, save_name);
+                    //save_network(&dqn->active_Q, "cartpole.nn");
+                    save_network_weights_images(&dqn->active_Q, dqn->retarget_count);
 
-
-            
-                system("mkdir cartpole_networks");
-                char save_name[256];
-                sprintf(save_name, "cartpole_networks\\%d.nn", dqn->retarget_count);
-                save_network(&dqn->active_Q, save_name);
-                save_network_weights_images(&dqn->active_Q, dqn->retarget_count);
-
-                save_lookup_table(&dqn->Q_table, "cartpole.lt");
+                    //save_lookup_table(&dqn->Q_table, "cartpole.lt");
+                }
             };
         }
         else

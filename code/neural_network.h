@@ -62,7 +62,7 @@ inline optstruct precision_binary16()
 }
 
 // NOTE(lubo): Another example precision specification (bfloat16)
-inline optstruct precision_bfloat16()
+/*inline optstruct precision_bfloat16()
 {
     optstruct fpopts = {};
   
@@ -74,21 +74,21 @@ inline optstruct precision_bfloat16()
     fpopts.explim = CPFLOAT_EXPRANGE_TARG;
 
     return fpopts;
-}
+    }*/
 
 // NOTE(lubo): Full precision (no rounding)
 inline optstruct precision_full()
 {
-    optstruct fpopts = {};
-    fpopts.round = CPFLOAT_NO_RND;
-    fpopts.explim = CPFLOAT_EXPRANGE_TARG;
+    optstruct fpopts = {"fp64"};
+    //fpopts.round = CPFLOAT_NO_RND;
+    //fpopts.explim = CPFLOAT_EXPRANGE_TARG;
     return fpopts;
 }
 
 inline Neural_Network_Hyperparams default_hyperparams()
 {
     Neural_Network_Hyperparams result = {};
-    result.learning_rate = 0.01f;
+    result.learning_rate = 0.1f;
     result.weight_decay = 0.001f;
     result.dropout_keep_p = 1;
     result.momentum_coefficient = 0;
@@ -122,7 +122,7 @@ public:
     list(matrix) vel_weights;
     list(matrix) vel_biases;
 
-    matrix evaluate_input();
+    void evaluate_input();
     void learn_from_expected_output(int minibatch_size);
 };
 

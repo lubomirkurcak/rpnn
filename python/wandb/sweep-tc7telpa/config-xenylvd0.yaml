@@ -1,0 +1,53 @@
+wandb_version: 1
+
+action_repeat:
+  value: 1
+alpha:
+  value: 1
+dropout_keep_p:
+  value: 1
+epochs:
+  value: 50000
+epsilon:
+  value: 1
+epsilon0:
+  value: 1
+epsilon1:
+  value: 0.1
+exploration_steps:
+  value: 1000000
+fp_emax:
+  value: 42
+fp_explim:
+  value: CPFLOAT_EXPRANGE_TARG
+fp_flip:
+  value: CPFLOAT_NO_SOFTERR
+fp_p:
+  value: 0
+fp_precision:
+  value: 17
+fp_round:
+  value: CPFLOAT_RND_SP
+fp_subnormal:
+  value: CPFLOAT_SUBN_USE
+gamma:
+  value: 0.99
+layer_sizes:
+  value:
+  - 4
+  - 16
+  - 16
+  - 16
+  - 2
+learning_rate:
+  value: 0.1
+minibatch_size:
+  value: 32
+momentum_coefficient:
+  value: 0
+replay_start_size:
+  value: 50000
+target_update_frequency:
+  value: 10000
+weight_decay:
+  value: 0.001

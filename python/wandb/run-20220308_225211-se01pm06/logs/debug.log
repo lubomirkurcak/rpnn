@@ -1,0 +1,26 @@
+2022-03-08 22:52:11,860 INFO    Thread-16 :4736 [wandb_setup.py:_flush():69] setting env: {'project': 'cartpole', 'entity': 'lubomirkurcak', 'root_dir': 'W:\\rpnn\\python', 'sweep_id': '24t1g292', 'run_id': 'se01pm06', 'sweep_param_path': 'W:\\rpnn\\python\\wandb\\sweep-24t1g292\\config-se01pm06.yaml'}
+2022-03-08 22:52:11,860 INFO    Thread-16 :4736 [wandb_setup.py:_flush():69] setting login settings: {}
+2022-03-08 22:52:11,861 INFO    Thread-16 :4736 [wandb_init.py:_log_setup():334] Logging user logs to W:\rpnn\python\wandb\run-20220308_225211-se01pm06\logs\debug.log
+2022-03-08 22:52:11,861 INFO    Thread-16 :4736 [wandb_init.py:_log_setup():335] Logging internal logs to W:\rpnn\python\wandb\run-20220308_225211-se01pm06\logs\debug-internal.log
+2022-03-08 22:52:11,861 INFO    Thread-16 :4736 [wandb_init.py:_jupyter_setup():285] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x000001F7EAF7AFD0>
+2022-03-08 22:52:11,861 INFO    Thread-16 :4736 [wandb_init.py:init():367] calling init triggers
+2022-03-08 22:52:11,862 INFO    Thread-16 :4736 [wandb_init.py:init():372] wandb.init called with sweep_config: {'action_repeat': 1, 'alpha': 1, 'dropout_keep_p': 1, 'epochs': 50000, 'epsilon': 1, 'epsilon0': 1, 'epsilon1': 0.1, 'exploration_steps': 1000000, 'gamma': 0.99, 'layer_sizes': [4, 16, 16, 16, 2], 'learning_rate': 0.1, 'minibatch_size': 32, 'momentum_coefficient': 0, 'replay_start_size': 50000, 'target_update_frequency': 10000, 'weight_decay': 0.001}
+config: {}
+2022-03-08 22:52:11,862 INFO    Thread-16 :4736 [wandb_init.py:init():416] starting backend
+2022-03-08 22:52:11,862 INFO    Thread-16 :4736 [backend.py:_multiprocessing_setup():69] multiprocessing start_methods=spawn, using: spawn
+2022-03-08 22:52:11,864 INFO    Thread-16 :4736 [backend.py:ensure_launched():123] starting backend process...
+2022-03-08 22:52:11,934 INFO    Thread-16 :4736 [backend.py:ensure_launched():127] started backend process with pid: 13928
+2022-03-08 22:52:11,934 INFO    Thread-16 :4736 [wandb_init.py:init():421] backend started and connected
+2022-03-08 22:52:11,944 INFO    Thread-16 :4736 [wandb_run.py:_config_callback():733] config_cb None None {'action_repeat': 1, 'alpha': 1, 'dropout_keep_p': 1, 'epochs': 50000, 'epsilon': 1, 'epsilon0': 1, 'epsilon1': 0.1, 'exploration_steps': 1000000, 'gamma': 0.99, 'layer_sizes': [4, 16, 16, 16, 2], 'learning_rate': 0.1, 'minibatch_size': 32, 'momentum_coefficient': 0, 'replay_start_size': 50000, 'target_update_frequency': 10000, 'weight_decay': 0.001}
+2022-03-08 22:52:11,945 INFO    Thread-16 :4736 [wandb_init.py:init():461] updated telemetry
+2022-03-08 22:52:11,953 INFO    Thread-16 :4736 [wandb_init.py:init():480] communicating current version
+2022-03-08 22:52:12,899 INFO    Thread-16 :4736 [wandb_init.py:init():485] got version response upgrade_message: "wandb version 0.12.11 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2022-03-08 22:52:12,900 INFO    Thread-16 :4736 [wandb_init.py:init():493] communicating run to backend with 30 second timeout
+2022-03-08 22:52:13,294 INFO    Thread-16 :4736 [wandb_init.py:init():518] starting run threads in backend
+2022-03-08 22:52:13,466 INFO    Thread-16 :4736 [wandb_run.py:_console_start():1476] atexit reg
+2022-03-08 22:52:13,466 INFO    Thread-16 :4736 [wandb_run.py:_redirect():1339] redirect: SettingsConsole.WRAP
+2022-03-08 22:52:13,467 INFO    Thread-16 :4736 [wandb_run.py:_redirect():1374] Wrapping output streams.
+2022-03-08 22:52:13,467 INFO    Thread-16 :4736 [wandb_run.py:_redirect():1390] Redirects installed.
+2022-03-08 22:52:13,467 INFO    Thread-16 :4736 [wandb_init.py:init():542] run started, returning control to user process
+2022-03-08 22:52:13,467 INFO    Thread-16 :4736 [wandb_run.py:finish():1135] finishing run lubomirkurcak/cartpole/se01pm06

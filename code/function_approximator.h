@@ -17,24 +17,24 @@ public:
     virtual matrix evaluate(matrix input) final
     {
         copy_matrix(this->input, input);
-        matrix result = evaluate_input();
-        copy_matrix(this->expected_output, result);
-        return result;
+        evaluate_input();
+        copy_matrix(this->expected_output, this->prediction);
+        return this->expected_output;
     }
     virtual matrix evaluate(double value)
     {
         Assert(this->input.allocation.size == sizeof(value));
         memcpy(this->input.allocation.memory, &value, this->input.allocation.size);
-        matrix result = evaluate_input();
-        copy_matrix(this->expected_output, result);
-        return result;
+        evaluate_input();
+        copy_matrix(this->expected_output, this->prediction);
+        return this->expected_output;
     }
     virtual matrix evaluate(double *input) final
     {
         memcpy(this->input.allocation.memory, input, this->input.allocation.size);
-        matrix result = evaluate_input();
-        copy_matrix(this->expected_output, result);
-        return result;
+        evaluate_input();
+        copy_matrix(this->expected_output, this->prediction);
+        return this->expected_output;
     }
     // NOTE(lubo): maps [0, 255] -> [0.0, 1.0]
     virtual matrix evaluate_byte_array(u8 *byte_data)
@@ -50,9 +50,9 @@ public:
             read++;
             write++;
         }
-        matrix result = evaluate_input();
-        copy_matrix(this->expected_output, result);
-        return result;
+        evaluate_input();
+        copy_matrix(this->expected_output, this->prediction);
+        return this->expected_output;
     }
 
     virtual void learn(matrix expected, int minibatch_size) final
@@ -80,7 +80,7 @@ public:
 
 private:    
     // NOTE(lubo): 'evaluate_input' must fill 'this->prediction', based on 'this->input'
-    virtual matrix evaluate_input() = 0;
+    virtual void evaluate_input() = 0;
 
     // NOTE(lubo): learn based on the difference between 'this->prediction' calculated by 'evaluate'
     // and the 'this->expected_output', set by the user.

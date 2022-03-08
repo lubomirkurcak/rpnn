@@ -138,7 +138,7 @@ hard_clear_list(DL_NAME *L)
 inline DL_TYPE *
 get_pointer_by_index(DL_NAME *L, int Index)
 {
-    Assert(Index >= 0 && Index < L->count);
+    Assert(Index >= 0 && Index < L->count, STRINGIZE(DL_NAME));
     DL_TYPE *Result = L->values + Index;
     return Result;
 }

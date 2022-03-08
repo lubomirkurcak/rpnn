@@ -16,7 +16,7 @@ public:
 
     double lerp_value;
 
-    matrix evaluate_input();
+    void evaluate_input();
     void learn_from_expected_output(int minibatch_size);
 };
 
@@ -164,12 +164,12 @@ internal Lookup_Table load_lookup_table(char *filename)
     return table;
 }
 
-matrix Lookup_Table::evaluate_input()
+void Lookup_Table::evaluate_input()
 {
     double *source = lookup_table_access(this, (double *)this->input.allocation.memory);
     memcpy(this->prediction.allocation.memory, source, this->prediction.allocation.size);
 
-    return this->prediction;
+    //return this->prediction;
 }
 
 void Lookup_Table::learn_from_expected_output(int minibatch_size)

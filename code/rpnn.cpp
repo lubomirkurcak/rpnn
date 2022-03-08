@@ -49,7 +49,8 @@ internal void train_mnist_example_config()
     printf("cpfloat_validate_optstruct returned %d\n", retval);
 
     Neural_Network_Hyperparams params = default_hyperparams();
-
+    params.learning_rate = 0.01f;
+    
     int correctly_classified_after_training = 
         train_mnist(params, layer_count, layer_sizes, epochs, minibatch_size);
     printf("correctly_classified_after_training %d\n", correctly_classified_after_training);
@@ -57,8 +58,15 @@ internal void train_mnist_example_config()
 
 internal void gym_cartpole_example_setup()
 {
+    auto rl_params = default_reinforcement_params();
+    auto nn_params = default_hyperparams();
+    int layer_sizes[] = {4, 16, 16, 16, 2};
+
+    nn_params.learning_rate = 0.1f;
+    nn_params.weight_decay = 0.00001f;
+
     Deep_Q_Network dqn = {};
-    gym_cartpole_create(&dqn);
+    gym_cartpole_create(&dqn, &rl_params, &nn_params, ArrayCount(layer_sizes), layer_sizes);
     
     //for(int i=0; i<10000; ++i)
     while(true)
@@ -89,7 +97,7 @@ int main(int argc, char *argv[])
 {
     unit_tests_run();
     
-    //train_mnist_example_config();
+    // train_mnist_example_config();
 
     gym_cartpole_example_setup();
     
